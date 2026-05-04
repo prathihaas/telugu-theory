@@ -8,6 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="brand/brand.css" />
 <style>
+  html, body { overflow-x: hidden; }
   body { background: var(--tt-paper); }
 
   .nav { position: sticky; top: 0; z-index: 50; background: var(--tt-paper); border-bottom: 1px solid rgba(26,18,10,0.08); padding: 18px 56px; display:flex; align-items:center; justify-content:space-between; }
@@ -129,8 +130,21 @@
 
   @media (max-width: 900px) {
     .nav ul, .nav .cta .ghost { display: none; }
-    section.sec, .hero, .band, .booking, .quotes, footer { padding-left: 24px; padding-right: 24px; }
-    .hero .row, .dishes, .qgrid, .band, .booking, .fgrid { grid-template-columns: 1fr; gap: 24px; }
+    .nav { padding: 12px 20px; }
+    section.sec, .hero, .band, .booking, .quotes, footer { padding-left: 20px; padding-right: 20px; }
+    .hero .row, .dishes, .qgrid, .band, .booking, .fgrid { grid-template-columns: 1fr; gap: 20px; }
+    .booking .fields { grid-template-columns: 1fr; }
+    .hero { padding-top: 48px; padding-bottom: 56px; }
+    .band { padding-top: 56px; padding-bottom: 56px; }
+    .quotes { padding-top: 56px; padding-bottom: 56px; }
+    section.sec { padding-top: 56px; padding-bottom: 56px; }
+    footer { padding-top: 48px; padding-bottom: 32px; }
+  }
+  @media (max-width: 600px) {
+    .dishes { grid-template-columns: 1fr; }
+    .hero .stats { grid-template-columns: 1fr 1fr; }
+    .hero h1 { font-size: clamp(40px, 11vw, 72px); }
+    .drawer { width: calc(100vw - 24px); right: 12px; }
   }
 </style>
 </head>
