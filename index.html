@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Telugu Theory — Brand Rollout</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="brand/brand.css" />
+<style>
+  body { background: var(--tt-red); color: var(--tt-cream); min-height: 100vh; }
+  .wrap { max-width: 1280px; margin: 0 auto; padding: 64px 48px 96px; }
+  header { display:flex; align-items:center; justify-content:space-between; gap: 24px; }
+  header img { width: 88px; height: 88px; border-radius: 14px; }
+  .eyebrow { font-family: var(--font-body); font-size: 13px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--tt-yellow); font-weight: 600; }
+  h1 { font-size: clamp(48px, 7vw, 108px); line-height: 0.94; margin: 40px 0 16px; color: var(--tt-cream); font-weight: 800; letter-spacing: -0.02em; }
+  h1 em { font-style: italic; color: var(--tt-yellow); font-weight: 500; }
+  .lede { font-size: 20px; max-width: 640px; color: rgba(247,239,224,0.78); line-height: 1.5; }
+  .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 18px; margin-top: 64px; }
+  .card { background: var(--tt-cream); color: var(--tt-ink); border-radius: 20px; overflow: hidden; text-decoration: none; display: flex; flex-direction: column; transition: transform .25s ease, box-shadow .25s ease; position: relative; }
+  .card:hover { transform: translateY(-4px); box-shadow: 0 30px 60px -20px rgba(0,0,0,0.4); }
+  .card .thumb { aspect-ratio: 16/10; background: var(--tt-yellow); display:flex; align-items:center; justify-content:center; position: relative; overflow:hidden; }
+  .card .thumb svg { width: 70%; height: 70%; }
+  .card .body { padding: 20px 22px 24px; }
+  .card h3 { font-family: var(--font-head); font-size: 26px; font-weight: 700; }
+  .card .meta { font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--tt-red); font-weight: 600; margin-bottom: 8px; }
+  .card p { margin: 8px 0 0; color: var(--tt-muted); font-size: 14.5px; line-height: 1.55; }
+  .num { position:absolute; top: 16px; right: 20px; font-family: var(--font-head); font-size: 14px; color: var(--tt-red); background: var(--tt-cream); width: 28px; height: 28px; border-radius: 999px; display:grid; place-items:center; font-weight: 700; }
+
+  .c-menu { grid-column: span 6; }
+  .c-web  { grid-column: span 6; }
+  .c-pack { grid-column: span 4; }
+  .c-soc  { grid-column: span 4; }
+  .c-disp { grid-column: span 4; }
+  @media (max-width: 900px) { .card { grid-column: span 12 !important; } }
+
+  footer { margin-top: 80px; display:flex; justify-content:space-between; gap: 24px; padding-top: 24px; border-top: 1px solid rgba(247,239,224,0.2); color: rgba(247,239,224,0.65); font-size: 13px; }
+  .tag { display:inline-block; padding: 6px 10px; background: rgba(251,176,64,0.16); color: var(--tt-yellow); border-radius: 999px; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <span class="eyebrow">Telugu Theory</span>
+      <div style="height:8px"></div>
+      <span class="tag">Brand rollout · April 2026</span>
+    </div>
+    <img src="brand/logo-yellow-outline.png" alt="Telugu Theory" />
+  </header>
+
+  <h1>A restaurant,<br/>told in <em>five chapters.</em></h1>
+  <p class="lede">A complete rollout of the Telugu Theory brand — from the menu diners hold in their hands, to the website where they order, to the packaging that arrives at the door. Five deliverables. One grammar.</p>
+
+  <div class="grid">
+
+    <a class="card c-menu" href="menu.html">
+      <div class="thumb" style="background:var(--tt-red)">
+        <img src="brand/logo-yellow-cream.png" style="width:52%" />
+        <span class="num">01</span>
+      </div>
+      <div class="body">
+        <div class="meta">Chapter 01 · Printed Menu</div>
+        <h3>The Menu</h3>
+        <p>A bi-fold dine-in menu with sections for Tiffins, Mains, Biryanis, Andhra specials, chutneys & desserts. Editorial layout, bilingual headers.</p>
+      </div>
+    </a>
+
+    <a class="card c-web" href="website.html">
+      <div class="thumb" style="background:var(--tt-yellow)">
+        <img src="brand/logo-cream-red.png" style="width:52%" />
+        <span class="num">02</span>
+      </div>
+      <div class="body">
+        <div class="meta">Chapter 02 · Web Experience</div>
+        <h3>Website & Ordering</h3>
+        <p>Full marketing site with cart, menu browsing, dish detail, checkout and confirmation screens. Seven scrollable sections.</p>
+      </div>
+    </a>
+
+    <a class="card c-soc" href="social.html">
+      <div class="thumb" style="background:#F7EFE0">
+        <img src="brand/logo-red-square.png" style="width:58%" />
+        <span class="num">03</span>
+      </div>
+      <div class="body">
+        <div class="meta">Chapter 03 · Social</div>
+        <h3>Social Templates</h3>
+        <p>Instagram posts, stories and reels covers. Twelve editable templates in the house style.</p>
+      </div>
+    </a>
+
+    <a class="card c-pack" href="packaging.html">
+      <div class="thumb" style="background:#273617">
+        <img src="brand/logo-yellow-outline.png" style="width:54%" />
+        <span class="num">04</span>
+      </div>
+      <div class="body">
+        <div class="meta">Chapter 04 · Packaging</div>
+        <h3>Packaging Mockups</h3>
+        <p>Takeaway box, paper bag, biryani tin, tiffin carrier, napkin, condiment sachets.</p>
+      </div>
+    </a>
+
+    <a class="card c-disp" href="reels.html">
+      <div class="thumb" style="background:var(--tt-forest)">
+        <img src="brand/logo-yellow-cream.png" style="width:54%" />
+        <span class="num">07</span>
+      </div>
+      <div class="body">
+        <div class="meta">Chapter 07 · Reels</div>
+        <h3>Reels Playbook</h3>
+        <p>Algorithm-aware reels system — five content pillars, hook frames, watermark anatomy, posting cadence and a pre-post checklist.</p>
+      </div>
+    </a>
+
+    <a class="card c-disp" href="instagram.html">
+      <div class="thumb" style="background:var(--tt-indigo)">
+        <img src="brand/logo-yellow-outline.png" style="width:54%" />
+        <span class="num">06</span>
+      </div>
+      <div class="body">
+        <div class="meta">Chapter 06 · Instagram</div>
+        <h3>Instagram Profile</h3>
+        <p>Full @telugu.theory profile mockup — bio, highlights, an 18-tile feed grid, and two story examples.</p>
+      </div>
+    </a>
+
+    <a class="card c-disp" href="displays.html">
+      <div class="thumb" style="background:var(--tt-sienna)">
+        <img src="brand/logo-yellow-cream.png" style="width:54%" />
+        <span class="num">05</span>
+      </div>
+      <div class="body">
+        <div class="meta">Chapter 05 · In-restaurant</div>
+        <h3>Restaurant Displays</h3>
+        <p>Entry signage, menu board, table tent, wayfinding, chalkboard specials, hours sign.</p>
+      </div>
+    </a>
+
+  </div>
+
+  <footer>
+    <div>Typefaces: Bricolage Grotesque + Anek Telugu · Palette: Cherry Red, Corn Yellow & Secondaries</div>
+    <div>Palette complementing palate.</div>
+  </footer>
+</div>
+</body>
+</html>

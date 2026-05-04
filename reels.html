@@ -1,0 +1,467 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Reels Playbook · Telugu Theory</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="brand/brand.css" />
+<style>
+  body { background: #1a1612; padding: 56px 28px 96px; font-family: var(--font-body); color: var(--tt-cream); }
+  .back { position: fixed; top: 16px; left: 16px; background: var(--tt-cream); color: var(--tt-ink); padding: 8px 14px; border-radius: 999px; text-decoration:none; font-size: 13px; z-index: 20; }
+  .wrap { max-width: 1380px; margin: 0 auto; }
+  .eye { font-size: 12px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--tt-yellow); font-weight: 700; }
+  h1 { font-family: var(--font-head); font-size: clamp(48px, 6.4vw, 96px); line-height: 0.95; letter-spacing: -0.02em; font-weight: 800; margin: 14px 0 14px; }
+  h1 em { font-style: italic; color: var(--tt-yellow); font-weight: 500; }
+  .lede { color: rgba(247,239,224,0.7); font-size: 17px; max-width: 720px; line-height: 1.55; }
+
+  section { margin-top: 72px; }
+  h2 { font-family: var(--font-head); font-size: 38px; font-weight: 800; letter-spacing: -0.01em; margin-bottom: 6px; }
+  .sub { color: rgba(247,239,224,0.6); font-size: 15px; margin-bottom: 28px; max-width: 740px; line-height: 1.55; }
+
+  /* ========== STORYBOARD: 6 frames per reel ========== */
+  .reel-board { background: rgba(255,255,255,0.03); border: 1px solid rgba(247,239,224,0.08); border-radius: 18px; padding: 26px; margin-bottom: 28px; }
+  .reel-head { display:flex; justify-content:space-between; align-items:flex-end; gap:24px; margin-bottom: 22px; flex-wrap:wrap; }
+  .reel-head .left .pillar { font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--tt-yellow); font-weight: 700; }
+  .reel-head h3 { font-family: var(--font-head); font-size: 32px; font-weight: 700; line-height: 1; letter-spacing: -0.01em; margin-top: 6px; }
+  .reel-head h3 em { font-style: italic; color: var(--tt-yellow); font-weight: 500; }
+  .reel-head .specs { display:flex; gap: 18px; }
+  .reel-head .specs div { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(247,239,224,0.55); }
+  .reel-head .specs div b { display:block; color: var(--tt-cream); font-family: var(--font-head); font-size: 16px; font-weight: 700; letter-spacing: 0; text-transform: none; margin-top: 2px; }
+
+  .frames { display:grid; grid-template-columns: repeat(6, 1fr); gap: 12px; }
+  @media (max-width: 1200px) { .frames { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 700px) { .frames { grid-template-columns: repeat(2, 1fr); } }
+
+  .frame-cell .ts { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--tt-yellow); font-weight: 700; margin-bottom: 6px; display:flex; justify-content:space-between; }
+  .frame-cell .ts span:last-child { color: rgba(247,239,224,0.4); }
+
+  .vframe { width: 100%; aspect-ratio: 9/16; border-radius: 10px; overflow: hidden; position: relative; background: #000; }
+  /* photo placeholders */
+  .ph { position:absolute; inset:0; }
+  .ph-pan { background: radial-gradient(ellipse at center 60%, #c5825a 0%, #6e3a22 55%, #1f0e07 100%); }
+  .ph-flame { background: radial-gradient(ellipse at 50% 70%, #f7c64b 0%, #d97724 30%, #6a1f0e 70%, #1a0805 100%); }
+  .ph-leaf { background: linear-gradient(135deg, #8fa353 0%, #4a5c25 60%, #20290e 100%); }
+  .ph-pour { background: linear-gradient(180deg, #6b4426 0%, #3d240f 100%); }
+  .ph-plate { background: radial-gradient(circle at 50% 55%, #e8d5b4 0%, #c19c70 35%, #4a2e18 100%); }
+  .ph-spice { background: linear-gradient(135deg, #d97724 0%, #8a3a14 50%, #2a1006 100%); }
+  .ph-ice { background: linear-gradient(180deg, #5a6e7a 0%, #2c3a44 100%); }
+  .ph-portrait { background: radial-gradient(ellipse at 50% 35%, #b88862 0%, #6a4225 50%, #2a180a 100%); }
+  .ph-handsdough { background: radial-gradient(circle at 50% 60%, #e8d5a8 0%, #a07a4a 40%, #2e1d0d 100%); }
+  .ph-banana { background: linear-gradient(135deg, #8a9c45 0%, #4a5820 70%, #1a200a 100%); }
+  .ph-table { background: radial-gradient(circle at 50% 50%, #c19372 0%, #6e4528 50%, #1a0e06 100%); }
+  .ph-night { background: radial-gradient(ellipse at 30% 30%, #d97724 0%, #4a1d0a 40%, #0a0604 100%); }
+
+  /* shot type badge */
+  .shot { position:absolute; top: 8px; left: 8px; background: rgba(0,0,0,0.55); color: var(--tt-cream); font-size: 9px; font-weight: 700; letter-spacing: 0.14em; padding: 3px 6px; border-radius: 4px; backdrop-filter: blur(4px); text-transform: uppercase; }
+
+  /* watermark on every frame — tiny, top-right inside safe zone */
+  .wm { position:absolute; top: 8px; right: 8px; display:flex; align-items:center; gap: 4px; }
+  .wm img { width: 14px; height: 14px; border-radius: 3px; }
+  .wm span { font-family: var(--font-head); font-weight: 700; font-size: 8px; color: var(--tt-cream); text-shadow: 0 1px 2px rgba(0,0,0,0.5); }
+
+  /* lower caption (sparse, only on hook + end) */
+  .vframe .lc { position:absolute; bottom: 12px; left: 10px; right: 10px; }
+  .vframe .lc .l { font-size: 8px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--tt-yellow); font-weight: 700; }
+  .vframe .lc .h { font-family: var(--font-head); font-size: 16px; font-weight: 700; line-height: 1.05; color: var(--tt-cream); margin-top: 2px; }
+  .vframe .lc .h em { font-style: italic; color: var(--tt-yellow); font-weight: 500; }
+
+  /* end-card frame */
+  .vframe.endc { background: var(--tt-red); display:flex; flex-direction:column; align-items:center; justify-content:center; gap: 8px; padding: 0 12px; text-align: center; }
+  .vframe.endc img { width: 38px; }
+  .vframe.endc h4 { font-family: var(--font-head); font-weight: 800; font-size: 14px; line-height: 0.95; }
+  .vframe.endc h4 em { font-style: italic; color: var(--tt-yellow); font-weight: 500; }
+  .vframe.endc .pill { background: var(--tt-yellow); color: var(--tt-sienna); padding: 3px 8px; border-radius: 999px; font-size: 9px; font-weight: 700; }
+
+  /* shot notes under each frame */
+  .frame-cell .notes { margin-top: 8px; font-size: 11.5px; color: rgba(247,239,224,0.7); line-height: 1.45; }
+  .frame-cell .notes b { color: var(--tt-cream); font-family: var(--font-head); font-weight: 700; }
+
+  /* reel footer: audio + caption */
+  .reel-foot { display:grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-top: 22px; padding-top: 22px; border-top: 1px solid rgba(247,239,224,0.08); }
+  .reel-foot .col h5 { font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--tt-yellow); font-weight: 700; margin-bottom: 6px; }
+  .reel-foot .col p { font-size: 14px; line-height: 1.55; color: rgba(247,239,224,0.85); }
+  .reel-foot .col code { font-family: ui-monospace, monospace; font-size: 12px; color: var(--tt-yellow); background: rgba(251,176,64,0.08); padding: 2px 6px; border-radius: 3px; }
+
+  /* PILLARS strip */
+  .pillars { display:grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-top: 18px; }
+  .pillar { background: rgba(255,255,255,0.04); border-radius: 14px; padding: 18px; }
+  .pillar .num { font-family: var(--font-head); font-weight: 800; font-size: 12px; color: var(--tt-yellow); letter-spacing: 0.14em; }
+  .pillar h3 { font-family: var(--font-head); font-size: 19px; font-weight: 700; line-height: 1.05; margin: 6px 0 4px; }
+  .pillar p { font-size: 12.5px; color: rgba(247,239,224,0.6); line-height: 1.5; }
+  @media (max-width: 1000px) { .pillars { grid-template-columns: repeat(2, 1fr); } }
+
+  /* CAMERA / LIGHTING / AUDIO grid */
+  .craft { display:grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .card { background: rgba(255,255,255,0.04); border-radius: 16px; padding: 22px 24px; }
+  .card h3 { font-family: var(--font-head); font-size: 22px; font-weight: 700; margin-bottom: 4px; }
+  .card .lab { font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--tt-yellow); font-weight: 700; }
+  .card ul { list-style: none; padding: 0; margin: 14px 0 0; }
+  .card ul li { padding: 8px 0; border-bottom: 1px dashed rgba(247,239,224,0.12); font-size: 13.5px; line-height: 1.45; color: rgba(247,239,224,0.85); display:grid; grid-template-columns: 14px 1fr; gap: 8px; }
+  .card ul li::before { content: '·'; color: var(--tt-yellow); font-weight: 800; font-size: 18px; line-height: 1; }
+  .card ul li b { color: var(--tt-cream); font-family: var(--font-head); }
+  @media (max-width: 1000px) { .craft { grid-template-columns: 1fr; } }
+
+  /* ALGORITHM RULES — compact */
+  .rules { display:grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .rule { background: rgba(255,255,255,0.04); border-radius: 12px; padding: 16px 18px; display:grid; grid-template-columns: 36px 1fr; gap: 14px; }
+  .rule .icon { width: 36px; height: 36px; border-radius: 8px; display:grid; place-items:center; font-weight: 800; font-size: 16px; color: #fff; }
+  .rule.do .icon { background: var(--tt-forest); }
+  .rule.no .icon { background: var(--tt-red); }
+  .rule h4 { font-family: var(--font-head); font-size: 16px; font-weight: 700; }
+  .rule p { color: rgba(247,239,224,0.65); font-size: 13px; line-height: 1.45; margin-top: 3px; }
+  .rule small { color: var(--tt-yellow); font-size: 10.5px; letter-spacing: 0.06em; display:block; margin-top: 6px; }
+  @media (max-width: 1000px) { .rules { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<a class="back" href="index.html">← Back</a>
+
+<div class="wrap">
+  <span class="eye">Chapter 07 · Reels Playbook</span>
+  <h1>Natural reels.<br/>Shot like <em>us.</em></h1>
+  <p class="lede">A shot-by-shot system for filming Telugu Theory reels — real food, real hands, real light. Branding shows up in the world we shoot, not as overlays. Built to be unmistakable in a feed and never trip Meta's reach signals.</p>
+
+  <!-- ============== PILLARS ============== -->
+  <section>
+    <h2>Five kinds of reel.</h2>
+    <p class="sub">Every shoot fits one of these. Pick the pillar before you pick up the phone — it tells you the lens, the light, and how long to roll.</p>
+    <div class="pillars">
+      <div class="pillar"><div class="num">PILLAR 01</div><h3>The dish.</h3><p>One plate, one slow camera move. The hero is the food, in its own light.</p></div>
+      <div class="pillar"><div class="num">PILLAR 02</div><h3>The making.</h3><p>Hands, fire, pestle, dough. Texture and rhythm. Sound is the action itself.</p></div>
+      <div class="pillar"><div class="num">PILLAR 03</div><h3>The arrival.</h3><p>Plate hits table, lid lifts, steam rises. Six seconds, no words.</p></div>
+      <div class="pillar"><div class="num">PILLAR 04</div><h3>The recipe.</h3><p>Three steps, three shots. Ends on the dish, not on a graphic.</p></div>
+      <div class="pillar"><div class="num">PILLAR 05</div><h3>The voice.</h3><p>Chef or regular speaks one line. Captioned, no music under speech.</p></div>
+    </div>
+  </section>
+
+  <!-- ============== STORYBOARD 1: BIRYANI ARRIVAL ============== -->
+  <section>
+    <h2>Three reels, frame by frame.</h2>
+    <p class="sub">Each storyboard is shoot-ready: timecodes, shot type, what's in frame, what to listen for.</p>
+
+    <div class="reel-board">
+      <div class="reel-head">
+        <div class="left">
+          <div class="pillar">Pillar 03 · The arrival</div>
+          <h3>Lid <em>off.</em></h3>
+        </div>
+        <div class="specs">
+          <div>Length<b>0:14</b></div>
+          <div>Lens<b>1× / 24mm</b></div>
+          <div>Light<b>Pass lamp + window</b></div>
+          <div>Audio<b>Natural · no music</b></div>
+        </div>
+      </div>
+
+      <div class="frames">
+        <div class="frame-cell">
+          <div class="ts"><span>0:00–0:02</span><span>HOOK</span></div>
+          <div class="vframe ph-night">
+            <span class="shot">EXTREME CU</span>
+            <span class="wm"><img src="brand/logo-yellow-cream.png"/><span>telugu.theory</span></span>
+            <div class="ph"></div>
+            <div class="lc"><div class="l">Tonight's biryani</div></div>
+          </div>
+          <p class="notes"><b>Steam rising</b> off the sealed dum pot, lit from one side. Black surround. No type yet — let the steam be the hook.</p>
+        </div>
+
+        <div class="frame-cell">
+          <div class="ts"><span>0:02–0:05</span><span>BUILD</span></div>
+          <div class="vframe ph-flame">
+            <span class="shot">CU · OVERHEAD</span>
+            <span class="wm"><img src="brand/logo-yellow-cream.png"/><span>telugu.theory</span></span>
+          </div>
+          <p class="notes"><b>Hands cracking</b> the dough seal around the lid. ASMR — the snap of bread breaking. Phone steady on a small tripod.</p>
+        </div>
+
+        <div class="frame-cell">
+          <div class="ts"><span>0:05–0:08</span><span>REVEAL</span></div>
+          <div class="vframe ph-pan">
+            <span class="shot">MEDIUM · TOP-DOWN</span>
+            <span class="wm"><img src="brand/logo-yellow-cream.png"/><span>telugu.theory</span></span>
+          </div>
+          <p class="notes"><b>Lid lifts.</b> Slow pull up. A wall of steam. The camera holds — don't cut early, this is the watch-time anchor.</p>
+        </div>
+
+        <div class="frame-cell">
+          <div class="ts"><span>0:08–0:11</span><span>DISH</span></div>
+          <div class="vframe ph-plate">
+            <span class="shot">CU · SPOON IN</span>
+            <span class="wm"><img src="brand/logo-yellow-cream.png"/><span>telugu.theory</span></span>
+          </div>
+          <p class="notes"><b>Spoon plunges</b> through the rice. Goat piece surfaces. Saffron, mint, fried onion all visible. One handheld swirl.</p>
+        </div>
+
+        <div class="frame-cell">
+          <div class="ts"><span>0:11–0:13</span><span>SERVE</span></div>
+          <div class="vframe ph-table">
+            <span class="shot">WIDE · TABLE</span>
+            <span class="wm"><img src="brand/logo-yellow-cream.png"/><span>telugu.theory</span></span>
+          </div>
+          <p class="notes"><b>Plate slides into frame</b> — biryani next to mirchi ka salan + raita. The room around it goes dark.</p>
+        </div>
+
+        <div class="frame-cell">
+          <div class="ts"><span>0:13–0:14</span><span>END</span></div>
+          <div class="vframe endc">
+            <img src="brand/logo-yellow-cream.png"/>
+            <h4>Come <em>in.</em></h4>
+            <span class="pill">Banjara Hills</span>
+          </div>
+          <p class="notes"><b>1.5-second logo card.</b> Drives replay — the strongest watch-time signal we control.</p>
+        </div>
+      </div>
+
+      <div class="reel-foot">
+        <div class="col">
+          <h5>Audio</h5>
+          <p>Record the actual lid-crack and steam at the table — no library track. If we add anything, it's a low <code>tabla loop @ -18db</code> from Instagram's audio library, never a trending sound that doesn't match the food.</p>
+        </div>
+        <div class="col">
+          <h5>Caption</h5>
+          <p>"sealed for 90 minutes. opened at your table. that's it, that's the post." → 3 hashtags · <code>#hyderabadibiryani #banjarahills #teluguthy</code></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============== STORYBOARD 2: AVAKAYA ============== -->
+    <div class="reel-board">
+      <div class="reel-head">
+        <div class="left">
+          <div class="pillar">Pillar 02 · The making</div>
+          <h3>Avakaya <em>day.</em></h3>
+        </div>
+        <div class="specs">
+          <div>Length<b>0:22</b></div>
+          <div>Lens<b>1× + 0.5×</b></div>
+          <div>Light<b>Daylight · north window</b></div>
+          <div>Audio<b>Natural mortar + voice</b></div>
+        </div>
+      </div>
+
+      <div class="frames">
+        <div class="frame-cell">
+          <div class="ts"><span>0:00–0:03</span><span>HOOK</span></div>
+          <div class="vframe ph-spice">
+            <span class="shot">EXTREME CU</span>
+            <span class="wm"><img src="brand/logo-yellow-cream.png"/><span>telugu.theory</span></span>
+            <div class="ph"></div>
+            <div class="lc"><div class="l">March, every year</div></div>
+          </div>
+          <p class="notes"><b>Mustard seeds</b> falling in slow motion onto a bed of red chilli powder. Backlight. The smell is the only thing we can't film.</p>
+        </div>
+
+        <div class="frame-cell">
+          <div class="ts"><span>0:03–0:08</span><span>HANDS</span></div>
+          <div class="vframe ph-handsdough">
+            <span class="shot">OVERHEAD</span>
+            <span class="wm"><img src="brand/logo-yellow-cream.png"/><span>telugu.theory</span></span>
+          </div>
+          <p class="notes"><b>Hands cutting raw mango</b> on a wooden board. Two cubes drop into a bowl. Camera locked off, no movement — let the hands do it.</p>
+        </div>
+
+        <div class="frame-cell">
+          <div class="ts"><span>0:08–0:13</span><span>MIX</span></div>
+          <div class="vframe ph-pour">
+            <span class="shot">CU · MORTAR</span>
+            <span class="wm"><img src="brand/logo-yellow-cream.png"/><span>telugu.theory</span></span>
+          </div>
+          <p class="notes"><b>Pestle in stone mortar.</b> Slow, rhythmic. The thump is the audio bed. Three pestle strikes, no edit.</p>
+        </div>
+
+        <div class="frame-cell">
+          <div class="ts"><span>0:13–0:17</span><span>POUR</span></div>
+          <div class="vframe ph-pan">
+            <span class="shot">CU · OIL POUR</span>
+            <span class="wm"><img src="brand/logo-yellow-cream.png"/><span>telugu.theory</span></span>
+          </div>
+          <p class="notes"><b>Sesame oil</b> streams onto the mango + spice mix. Gold thread on red. Phone slightly underexposed to keep the colour deep.</p>
+        </div>
+
+        <div class="frame-cell">
+          <div class="ts"><span>0:17–0:20</span><span>JAR</span></div>
+          <div class="vframe ph-leaf">
+            <span class="shot">WIDE · SHELF</span>
+            <span class="wm"><img src="brand/logo-yellow-cream.png"/><span>telugu.theory</span></span>
+          </div>
+          <p class="notes"><b>Sealed glass jar</b> placed on a shelf next to last year's batch. Hand pulls back. Patience visible.</p>
+        </div>
+
+        <div class="frame-cell">
+          <div class="ts"><span>0:20–0:22</span><span>END</span></div>
+          <div class="vframe endc">
+            <img src="brand/logo-yellow-cream.png"/>
+            <h4>Cured. <em>Waiting.</em></h4>
+            <span class="pill">on the menu in May</span>
+          </div>
+          <p class="notes"><b>End card.</b> Note the date — gives the reel a return reason.</p>
+        </div>
+      </div>
+
+      <div class="reel-foot">
+        <div class="col">
+          <h5>Audio</h5>
+          <p>100% diegetic — mortar thump, oil pour, glass jar set. One on-camera voice line at 0:08: <i>"avakaya is patience. that's all it is."</i> Burned-in caption for sound-off viewers.</p>
+        </div>
+        <div class="col">
+          <h5>Caption</h5>
+          <p>"raw mango, mustard, sesame oil, salt. no shortcut. ready by may, gone by july." → <code>#avakaya #andhrapickle #teluguthy</code></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============== STORYBOARD 3: PESARATTU ============== -->
+    <div class="reel-board">
+      <div class="reel-head">
+        <div class="left">
+          <div class="pillar">Pillar 04 · The recipe</div>
+          <h3>Pesarattu, <em>three steps.</em></h3>
+        </div>
+        <div class="specs">
+          <div>Length<b>0:28</b></div>
+          <div>Lens<b>1× wide</b></div>
+          <div>Light<b>Tawa fire · ambient</b></div>
+          <div>Audio<b>Sizzle + 1 line VO</b></div>
+        </div>
+      </div>
+
+      <div class="frames">
+        <div class="frame-cell">
+          <div class="ts"><span>0:00–0:03</span><span>HOOK</span></div>
+          <div class="vframe ph-leaf">
+            <span class="shot">CU · SOAKED DAL</span>
+            <span class="wm"><img src="brand/logo-yellow-cream.png"/><span>telugu.theory</span></span>
+            <div class="ph"></div>
+            <div class="lc"><div class="l">Step 01 of 03</div><div class="h">Green gram <em>overnight.</em></div></div>
+          </div>
+          <p class="notes"><b>Tilt down</b> from soaking moong dal in a steel bowl. Tag step 1/3 — viewers want to know how long it takes.</p>
+        </div>
+
+        <div class="frame-cell">
+          <div class="ts"><span>0:03–0:09</span><span>STEP 1</span></div>
+          <div class="vframe ph-leaf">
+            <span class="shot">OVERHEAD · GRINDER</span>
+            <span class="wm"><img src="brand/logo-yellow-cream.png"/><span>telugu.theory</span></span>
+          </div>
+          <p class="notes"><b>Wet grinder</b> turning dal into batter. Ginger and cumin tumble in. Sound: the grinder hum.</p>
+        </div>
+
+        <div class="frame-cell">
+          <div class="ts"><span>0:09–0:16</span><span>STEP 2</span></div>
+          <div class="vframe ph-flame">
+            <span class="shot">CU · TAWA</span>
+            <span class="wm"><img src="brand/logo-yellow-cream.png"/><span>telugu.theory</span></span>
+            <div class="lc"><div class="l">Step 02</div><div class="h">Spread <em>thin.</em></div></div>
+          </div>
+          <p class="notes"><b>Ladle pour</b> + circular spread on a smoking tawa. Onions and chilli scattered on top. The sizzle is the music.</p>
+        </div>
+
+        <div class="frame-cell">
+          <div class="ts"><span>0:16–0:22</span><span>STEP 3</span></div>
+          <div class="vframe ph-pan">
+            <span class="shot">CU · FOLD</span>
+            <span class="wm"><img src="brand/logo-yellow-cream.png"/><span>telugu.theory</span></span>
+            <div class="lc"><div class="l">Step 03</div><div class="h">Fold + <em>flip.</em></div></div>
+          </div>
+          <p class="notes"><b>Spatula folds</b> the crepe in half. Crisp edge. One-second hold on the gold underside.</p>
+        </div>
+
+        <div class="frame-cell">
+          <div class="ts"><span>0:22–0:26</span><span>SERVE</span></div>
+          <div class="vframe ph-banana">
+            <span class="shot">WIDE · LEAF</span>
+            <span class="wm"><img src="brand/logo-yellow-cream.png"/><span>telugu.theory</span></span>
+          </div>
+          <p class="notes"><b>Pesarattu on banana leaf</b> with allam pachadi (ginger chutney). Hand reaches in — half of one is broken off and dipped.</p>
+        </div>
+
+        <div class="frame-cell">
+          <div class="ts"><span>0:26–0:28</span><span>END</span></div>
+          <div class="vframe endc">
+            <img src="brand/logo-yellow-cream.png"/>
+            <h4>Or — <em>come over.</em></h4>
+            <span class="pill">Tiffin · 12–4pm</span>
+          </div>
+          <p class="notes"><b>End card</b> with the soft-sell. Recipes earn saves; the card earns visits.</p>
+        </div>
+      </div>
+
+      <div class="reel-foot">
+        <div class="col">
+          <h5>Audio</h5>
+          <p>Diegetic sizzle bed. One VO line over step 02: <i>"thin. always thin. that's the whole trick."</i> Recorded on a separate phone, dropped under the picture.</p>
+        </div>
+        <div class="col">
+          <h5>Caption</h5>
+          <p>"andhra's breakfast crepe, made the way our grandmothers made it. soaked dal, no rice, ginger chutney." → <code>#pesarattu #andhrabreakfast #tiffin</code></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== CRAFT — CAMERA / LIGHT / AUDIO ============== -->
+  <section>
+    <h2>House rules for shooting.</h2>
+    <p class="sub">Same phone, same lens, same light direction every time. Consistency lives in the craft, not in graphics.</p>
+    <div class="craft">
+
+      <div class="card">
+        <div class="lab">Camera</div>
+        <h3>Phone, but disciplined.</h3>
+        <ul>
+          <li><b>iPhone 15 Pro</b> · 1× lens for everything except overheads (0.5×).</li>
+          <li><b>Vertical 1080×1920</b>, 30fps. Never landscape, never 24fps cinematic.</li>
+          <li><b>Tripod or gimbal,</b> always. No handheld unless the sway is part of the shot.</li>
+          <li><b>Locked exposure + focus</b> by tap-and-hold. Auto-exposure ruins the dum reveal.</li>
+          <li><b>One move per shot</b> — push in, tilt down, or hold. Never two.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="lab">Light</div>
+        <h3>One source, warm.</h3>
+        <ul>
+          <li><b>Pass lamp</b> (warm tungsten) is the house key light. Never overhead fluorescents.</li>
+          <li><b>North-facing window</b> for daytime prep shoots. Soft, neutral.</li>
+          <li><b>Dark surround.</b> Black tablecloth or wood under hero shots.</li>
+          <li><b>Underexpose by ⅓ stop</b> — keeps reds rich, gold spice deep.</li>
+          <li><b>No ring light.</b> Ever. Reads "TikTok," not "restaurant."</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="lab">Sound</div>
+        <h3>Diegetic first.</h3>
+        <ul>
+          <li><b>Record the action.</b> Sizzle, thump, snap, pour. That's the track.</li>
+          <li><b>Voice = phone close.</b> 6 inches from mouth, on a separate device.</li>
+          <li><b>Music sparingly.</b> One <code>tabla loop</code> from Instagram's audio library if needed — never trending pop.</li>
+          <li><b>No copyright music.</b> Mutes the reel for half the planet.</li>
+          <li><b>Burn captions in</b> for any spoken line. Half of viewers watch on mute.</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============== ALGORITHM RULES ============== -->
+  <section>
+    <h2>What Meta rewards.</h2>
+    <p class="sub">Every rule maps to a confirmed 2026 ranking signal — watch time, sends per reach, originality, eligibility.</p>
+    <div class="rules">
+      <div class="rule do"><div class="icon">✓</div><div><h4>Hook in 1.7 seconds.</h4><p>Steam, fire, a knife, the lid coming off. Visual hook before any voice or graphic.</p><small>Watch time</small></div></div>
+      <div class="rule no"><div class="icon">✗</div><div><h4>No CapCut / TikTok logos.</h4><p>Export from the source file. Cropping isn't enough — content fingerprinting catches re-uploads.</p><small>Eligibility</small></div></div>
+      <div class="rule do"><div class="icon">✓</div><div><h4>End on the logo card.</h4><p>1.5-sec final frame loops back to the hook → replays → highest-weight signal we control.</p><small>Watch time + replays</small></div></div>
+      <div class="rule no"><div class="icon">✗</div><div><h4>No 720p exports.</h4><p>Always 1080×1920. Anything lower is silently deprioritised.</p><small>Eligibility</small></div></div>
+      <div class="rule do"><div class="icon">✓</div><div><h4>Make it DM-shareable.</h4><p>Sends per reach > likes for non-follower discovery. One quote, one number, one technique — easy to forward.</p><small>Sends per reach</small></div></div>
+      <div class="rule no"><div class="icon">✗</div><div><h4>No engagement bait.</h4><p>"Tag a friend who…" is explicitly penalised. Let the food do the asking.</p><small>Originality</small></div></div>
+      <div class="rule do"><div class="icon">✓</div><div><h4>Original audio only.</h4><p>Real kitchen sound, or our own voice. Trending pop tracks force mutes and tank watch time.</p><small>Originality + completion</small></div></div>
+      <div class="rule no"><div class="icon">✗</div><div><h4>Never burn type into the bottom 24%.</h4><p>That's where IG's caption + audio chip live. Anything we put there gets clipped.</p><small>UX / completion</small></div></div>
+    </div>
+  </section>
+
+</div>
+</body>
+</html>

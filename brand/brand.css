@@ -1,0 +1,66 @@
+/* Telugu Theory Brand System */
+@font-face {
+  font-family: 'Anek Telugu';
+  src: url('fonts/AnekTelugu-Regular.ttf') format('truetype');
+  font-weight: 400;
+}
+@font-face {
+  font-family: 'Anek Telugu';
+  src: url('fonts/AnekTelugu-Medium.ttf') format('truetype');
+  font-weight: 500;
+}
+@font-face {
+  font-family: 'Anek Telugu';
+  src: url('fonts/AnekTelugu-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+}
+@font-face {
+  font-family: 'Anek Telugu';
+  src: url('fonts/AnekTelugu-Bold.ttf') format('truetype');
+  font-weight: 700;
+}
+
+:root {
+  /* Primary */
+  --tt-red: #BE1E2D;
+  --tt-yellow: #FBB040;
+  /* Secondary */
+  --tt-sandstone: #DCA15D;
+  --tt-sienna: #882D18;
+  --tt-indigo: #4C547A;
+  --tt-olive: #5F6C37;
+  --tt-forest: #273617;
+  --tt-clay: #C49A6C;
+  /* Neutrals */
+  --tt-cream: #F7EFE0;
+  --tt-paper: #FBF6EC;
+  --tt-ink: #1A120A;
+  --tt-muted: #7a6a55;
+
+  --font-head: 'Bricolage Grotesque', 'Playfair Display', Georgia, serif;
+  --font-body: 'Anek Telugu', 'Inter', system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--tt-ink);
+  background: var(--tt-paper);
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3, h4 {
+  font-family: var(--font-head);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+/* Kolam pattern (SVG tile) used as subtle decorative motif */
+.tt-kolam-bg {
+  background-image:
+    radial-gradient(circle at 0 0, transparent 19px, var(--tt-yellow) 19px, var(--tt-yellow) 20px, transparent 20px),
+    radial-gradient(circle at 40px 40px, transparent 19px, var(--tt-yellow) 19px, var(--tt-yellow) 20px, transparent 20px);
+  background-size: 40px 40px;
+  opacity: 0.12;
+}

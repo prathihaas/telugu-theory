@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Restaurant Displays · Telugu Theory</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="brand/brand.css" />
+<style>
+  body { background: #e8d9c2; padding: 48px 24px 80px; }
+  .back { position: fixed; top: 16px; left: 16px; background: var(--tt-ink); color: var(--tt-cream); padding: 8px 14px; border-radius: 999px; text-decoration:none; font-size: 13px; z-index:10; }
+  .wrap { max-width: 1400px; margin: 0 auto; }
+  header { margin-bottom: 48px; }
+  header .eye { font-size: 12px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--tt-red); font-weight: 600; }
+  header h1 { font-size: clamp(44px, 6vw, 84px); line-height: 0.95; margin: 18px 0 10px; font-weight: 800; letter-spacing: -0.02em; }
+  header h1 em { font-style: italic; color: var(--tt-red); font-weight: 500; }
+  header p { color: var(--tt-muted); max-width: 580px; font-size: 15.5px; line-height: 1.55; }
+
+  .grid { display:grid; grid-template-columns: repeat(12, 1fr); gap: 22px; }
+  .card { background: #fff; border-radius: 22px; padding: 26px; box-shadow: 0 30px 60px -30px rgba(0,0,0,0.25); }
+  .card .lbl { font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--tt-muted); font-weight: 700; }
+  .card h3 { font-family: var(--font-head); font-size: 22px; margin: 6px 0 14px; font-weight: 700; }
+  .stage { border-radius: 14px; overflow: hidden; position: relative; }
+  .c12 { grid-column: span 12; } .c8 { grid-column: span 8; } .c6 { grid-column: span 6; } .c4 { grid-column: span 4; }
+  @media (max-width: 900px) { .c4, .c6, .c8 { grid-column: span 12; } }
+
+  /* 1 — Entry signage (wall) */
+  .sign-wall { aspect-ratio: 16/9; background: linear-gradient(180deg, #b09077 0%, #8e7056 100%); display:grid; place-items:center; position:relative; }
+  .sign-wall::before { content:''; position:absolute; inset: 0; background: repeating-linear-gradient(0deg, transparent 0 58px, rgba(0,0,0,0.07) 58px 60px); }
+  .sign { width: 46%; aspect-ratio: 1/1; background: var(--tt-red); border-radius: 18px; padding: 28px; color: var(--tt-cream); display:flex; flex-direction:column; justify-content: space-between; box-shadow: 0 30px 40px rgba(0,0,0,0.25), inset 0 -10px 20px rgba(0,0,0,0.15); border: 2px solid rgba(251,176,64,0.3); }
+  .sign .top { display:flex; justify-content:space-between; }
+  .sign img { width: 70px; height: 70px; border-radius: 10px; }
+  .sign .est { font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--tt-yellow); font-weight: 700; text-align: right; }
+  .sign h2 { font-family: var(--font-head); font-size: 62px; line-height: 0.88; font-weight: 800; letter-spacing: -0.03em; margin-top: auto; }
+  .sign h2 em { font-style: italic; color: var(--tt-yellow); font-weight: 500; }
+  .sign .bot { display:flex; justify-content: space-between; font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; margin-top: 16px; color: rgba(247,239,224,0.65); font-weight: 600; }
+
+  /* 2 — Menu board (wall-mounted) */
+  .menuboard { background: var(--tt-forest); padding: 32px 40px; color: var(--tt-cream); aspect-ratio: 16/10; display:grid; grid-template-columns: 1.4fr 1fr; gap: 28px; }
+  .menuboard .top { font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--tt-yellow); font-weight: 700; }
+  .menuboard h2 { font-family: var(--font-head); font-size: 46px; line-height: 0.95; font-weight: 800; margin: 6px 0 18px; letter-spacing: -0.02em; }
+  .menuboard h2 em { font-style: italic; color: var(--tt-yellow); font-weight: 500; }
+  .menuboard ul { list-style: none; padding: 0; margin: 0; }
+  .menuboard li { display:grid; grid-template-columns: 1fr auto; padding: 8px 0; border-bottom: 1px dashed rgba(251,176,64,0.28); font-size: 15px; gap: 12px; }
+  .menuboard li b { font-family: var(--font-head); font-weight: 600; color: var(--tt-cream); }
+  .menuboard li span { color: var(--tt-yellow); font-family: var(--font-head); font-weight: 600; }
+  .menuboard li .d { grid-column: 1 / -1; font-size: 11.5px; color: rgba(247,239,224,0.55); margin-top: -2px; }
+  .menuboard .side { background: var(--tt-red); border-radius: 10px; padding: 24px; display:flex; flex-direction:column; justify-content: space-between; }
+  .menuboard .side .tag { font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--tt-yellow); font-weight: 700; }
+  .menuboard .side h3 { font-family: var(--font-head); font-size: 32px; line-height: 1; margin: 10px 0 6px; font-weight: 700; }
+  .menuboard .side p { font-size: 12.5px; color: rgba(247,239,224,0.75); line-height: 1.5; }
+  .menuboard .side .pr { font-family: var(--font-head); font-weight: 700; font-size: 26px; color: var(--tt-yellow); margin-top: 12px; }
+
+  /* 3 — Table tent */
+  .tent-stage { aspect-ratio: 4/3; background: radial-gradient(ellipse at 50% 100%, rgba(0,0,0,0.25) 0%, transparent 60%), linear-gradient(180deg, #ddcdb3 0%, #c9b595 100%); display:grid; place-items:center; }
+  .tent { width: 54%; height: 80%; position: relative; transform: perspective(900px) rotateY(-14deg); }
+  .tent-face { position:absolute; inset: 0; background: var(--tt-cream); border-radius: 2px; box-shadow: 0 20px 30px rgba(0,0,0,0.2); padding: 22px 20px; display:flex; flex-direction:column; justify-content: space-between; color: var(--tt-ink); border: 1px solid rgba(136,45,24,0.12); }
+  .tent-face .eye { font-size: 9.5px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--tt-red); font-weight: 700; }
+  .tent-face h3 { font-family: var(--font-head); font-size: 28px; line-height: 1; font-weight: 700; letter-spacing: -0.01em; margin-top: 6px; }
+  .tent-face h3 em { color: var(--tt-red); font-style: italic; font-weight: 500; }
+  .tent-face .qr { width: 64px; height: 64px; background: conic-gradient(from 0deg, var(--tt-ink) 0 25%, transparent 25% 50%, var(--tt-ink) 50% 75%, transparent 75%), repeating-linear-gradient(0deg, var(--tt-ink) 0 4px, transparent 4px 8px), var(--tt-ink); border: 4px solid var(--tt-cream); outline: 2px solid var(--tt-ink); }
+  .tent-face .foot { display:flex; justify-content: space-between; align-items: flex-end; gap: 10px; }
+  .tent-face .foot span { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--tt-sienna); font-weight: 700; }
+
+  /* 4 — Wayfinding (washroom/kitchen) */
+  .way-stage { aspect-ratio: 4/3; background: repeating-linear-gradient(90deg, #d8c4a7 0 60px, #cdb896 60px 62px); display:grid; grid-template-columns: 1fr 1fr; gap: 14%; padding: 8%; place-items:center; }
+  .way-sign { aspect-ratio: 1/1.3; background: var(--tt-yellow); color: var(--tt-sienna); padding: 22px 16px; border-radius: 4px; box-shadow: 0 10px 24px rgba(0,0,0,0.2); display:flex; flex-direction:column; align-items: center; justify-content: space-between; text-align: center; }
+  .way-sign .ic { font-family: var(--font-head); font-size: 80px; line-height: 1; font-weight: 800; color: var(--tt-red); letter-spacing: -0.04em; }
+  .way-sign h4 { font-family: var(--font-head); font-size: 20px; font-weight: 700; }
+  .way-sign .sub { font-size: 9px; letter-spacing: 0.28em; text-transform: uppercase; font-weight: 700; color: var(--tt-red); }
+  .way-sign.red { background: var(--tt-red); color: var(--tt-cream); }
+  .way-sign.red .ic { color: var(--tt-yellow); }
+  .way-sign.red .sub { color: var(--tt-yellow); }
+
+  /* 5 — Chalkboard specials */
+  .chalk { aspect-ratio: 4/3; background: #1e1a16; padding: 30px; display:flex; flex-direction:column; color: #f3e6c8; border: 16px solid #4a2d18; box-shadow: inset 0 0 60px rgba(255,255,255,0.04); position: relative; }
+  .chalk::before { content:''; position:absolute; inset: 0; background: radial-gradient(circle at 30% 10%, rgba(255,255,255,0.06) 0%, transparent 50%); pointer-events:none; }
+  .chalk .top { font-family: var(--font-head); font-style: italic; font-size: 14px; color: #fcd799; letter-spacing: 0.05em; }
+  .chalk h2 { font-family: var(--font-head); font-size: 46px; line-height: 0.9; margin: 10px 0 18px; font-weight: 800; letter-spacing: -0.02em; }
+  .chalk h2 em { font-style: italic; color: #fcd799; font-weight: 500; }
+  .chalk ul { list-style: none; padding: 0; margin: 0; }
+  .chalk li { display:flex; justify-content:space-between; padding: 7px 0; font-family: var(--font-head); font-weight: 600; font-size: 17px; border-bottom: 1px dashed rgba(252,215,153,0.3); }
+  .chalk li span:last-child { color: #fcd799; }
+  .chalk .foot { margin-top: auto; display:flex; justify-content: space-between; font-family: var(--font-head); font-style: italic; font-size: 13px; color: rgba(243,230,200,0.6); }
+
+  /* 6 — Hours / neon window */
+  .window-stage { aspect-ratio: 4/3; background: linear-gradient(180deg, #1a1612 0%, #2a231c 100%); display:grid; place-items:center; position:relative; overflow: hidden; }
+  .window-stage::before { content:''; position:absolute; inset: 0; background: radial-gradient(ellipse at 50% 50%, rgba(251,176,64,0.12) 0%, transparent 60%); }
+  .neon { width: 58%; aspect-ratio: 1.2/1; padding: 22px; border: 2px solid #ffb848; border-radius: 12px; color: #ffecc7; display:flex; flex-direction:column; justify-content: space-between; box-shadow: 0 0 20px rgba(255,184,72,0.5), inset 0 0 20px rgba(255,184,72,0.2); text-shadow: 0 0 8px rgba(255,184,72,0.7); position:relative; z-index: 1; }
+  .neon .eye { font-size: 10px; letter-spacing: 0.34em; text-transform: uppercase; color: #ffb848; font-weight: 700; text-shadow: 0 0 6px rgba(255,184,72,0.8); }
+  .neon h2 { font-family: var(--font-head); font-size: 52px; line-height: 0.9; font-weight: 800; margin-top: 4px; letter-spacing: -0.02em; }
+  .neon h2 em { font-style: italic; font-weight: 500; color: #fff; text-shadow: 0 0 10px rgba(255,255,255,0.4); }
+  .neon .hrs { font-family: var(--font-head); font-size: 13px; line-height: 1.7; font-weight: 500; }
+
+  /* 7 — Apron tag */
+  .apron-stage { aspect-ratio: 4/3; background: linear-gradient(180deg, #d9c4a4 0%, #bfa682 100%); display:grid; place-items:center; }
+  .apron { width: 58%; aspect-ratio: 1/1.1; background: var(--tt-forest); border-radius: 4px; padding: 26px; color: var(--tt-cream); display:flex; flex-direction:column; justify-content: space-between; position: relative; box-shadow: 0 20px 30px rgba(0,0,0,0.3); }
+  .apron::before { content:''; position:absolute; top: 0; left: 50%; transform: translate(-50%, -50%); width: 20%; height: 10%; border: 6px solid #4a573a; border-bottom: 0; border-radius: 100px 100px 0 0; }
+  .apron .patch { background: var(--tt-yellow); color: var(--tt-sienna); padding: 14px; border-radius: 6px; align-self: flex-start; max-width: 85%; }
+  .apron .patch .eye { font-size: 9px; letter-spacing: 0.28em; text-transform: uppercase; font-weight: 700; color: var(--tt-red); }
+  .apron .patch h4 { font-family: var(--font-head); font-size: 22px; margin-top: 4px; font-weight: 700; line-height: 1; }
+  .apron .foot { display:flex; justify-content:space-between; align-items: flex-end; color: rgba(247,239,224,0.65); font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; font-weight: 700; }
+  .apron .foot img { width: 40px; height: 40px; border-radius: 6px; }
+
+  /* 8 — Wall poster (house rules) */
+  .poster-stage { aspect-ratio: 4/3; background: linear-gradient(180deg, #e7d7bc 0%, #d1bd99 100%); display:grid; place-items:center; }
+  .poster { width: 68%; height: 86%; background: var(--tt-cream); padding: 26px 28px; box-shadow: 0 20px 40px rgba(0,0,0,0.2); display:flex; flex-direction:column; border: 1px solid rgba(136,45,24,0.12); }
+  .poster .eye { font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--tt-red); font-weight: 700; }
+  .poster h2 { font-family: var(--font-head); font-size: 38px; line-height: 0.95; font-weight: 800; margin: 4px 0 18px; letter-spacing: -0.02em; }
+  .poster h2 em { font-style: italic; color: var(--tt-red); font-weight: 500; }
+  .poster ol { padding-left: 20px; margin: 0; color: var(--tt-sienna); }
+  .poster ol li { font-family: var(--font-head); font-size: 16px; font-weight: 600; padding: 5px 0; }
+  .poster ol li em { font-style: italic; color: var(--tt-red); font-weight: 500; }
+  .poster .foot { margin-top: auto; display:flex; justify-content:space-between; font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--tt-muted); font-weight: 700; }
+</style>
+</head>
+<body>
+<a class="back" href="index.html">← Back</a>
+<div class="wrap">
+  <header>
+    <span class="eye">Chapter 05 · In-restaurant</span>
+    <h1>The <em>room</em> speaks in the same voice.</h1>
+    <p>Eight in-restaurant touchpoints — from the signage outside, to the menu board behind the counter, to the small card on every table. One typography system, one palette, rotating formats.</p>
+  </header>
+
+  <div class="grid">
+
+    <div class="card c6">
+      <div class="lbl">01 · Entry signage</div>
+      <h3>Mounted square · 600 × 600 mm</h3>
+      <div class="stage sign-wall">
+        <div class="sign">
+          <div class="top">
+            <img src="brand/logo-yellow-outline.png"/>
+            <span class="est">Est. 2024<br/>Banjara Hills</span>
+          </div>
+          <h2>Telugu<br/><em>Theory.</em></h2>
+          <div class="bot"><span>Andhra · Telangana</span><span>Hyderabad</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card c6">
+      <div class="lbl">02 · Counter menu board</div>
+      <h3>Wall-mounted · 1200 × 750 mm</h3>
+      <div class="stage">
+        <div class="menuboard">
+          <div>
+            <div class="top">Today · Tuesday</div>
+            <h2>Tiffin at<br/><em>first light.</em></h2>
+            <ul>
+              <li><b>Pesarattu Upma</b><span>₹ 240</span><span class="d">Green gram crepe, rava upma centre, ginger-curry leaf</span></li>
+              <li><b>Ragi Sangati · Natu Kodi</b><span>₹ 360</span><span class="d">Finger millet ball, country chicken pulusu</span></li>
+              <li><b>Idli Karam</b><span>₹ 180</span><span class="d">Split idlis, gunpowder, a spoon of sesame oil</span></li>
+              <li><b>Attu (Minapa)</b><span>₹ 220</span><span class="d">Black gram pancake, cumin, a streak of ghee</span></li>
+            </ul>
+          </div>
+          <div class="side">
+            <div>
+              <div class="tag">The Big One</div>
+              <h3>Kacchi<br/><em>Goat Biryani</em></h3>
+              <p>Served from noon only. Ninety minutes on dum. Salan and raita on the side.</p>
+            </div>
+            <div class="pr">₹ 620</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card c4">
+      <div class="lbl">03 · Table tent</div>
+      <h3>A5 tri-fold · table QR</h3>
+      <div class="stage tent-stage">
+        <div class="tent">
+          <div class="tent-face">
+            <div>
+              <div class="eye">Scan to order</div>
+              <h3>From this<br/>table, to <em>our kitchen.</em></h3>
+            </div>
+            <div class="foot">
+              <div>
+                <span>Table № 04</span><br/>
+                <span style="font-size:9px; color: var(--tt-muted); letter-spacing: 0.15em">Or flag a server</span>
+              </div>
+              <div class="qr"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card c4">
+      <div class="lbl">04 · Wayfinding</div>
+      <h3>Washroom · Kitchen pair</h3>
+      <div class="stage way-stage">
+        <div class="way-sign">
+          <span class="sub">Washroom</span>
+          <div class="ic">W</div>
+          <h4>This way →</h4>
+        </div>
+        <div class="way-sign red">
+          <span class="sub">Kitchen</span>
+          <div class="ic">K</div>
+          <h4>Please, no.</h4>
+        </div>
+      </div>
+    </div>
+
+    <div class="card c4">
+      <div class="lbl">05 · Chalkboard specials</div>
+      <h3>Daily · behind the counter</h3>
+      <div class="stage chalk">
+        <div class="top">Wednesday · April 22</div>
+        <h2>Off the <em>board.</em></h2>
+        <ul>
+          <li><span>Chepala Pulusu</span><span>₹ 480</span></li>
+          <li><span>Prawn Iguru</span><span>₹ 520</span></li>
+          <li><span>Gongura Mamsam</span><span>₹ 560</span></li>
+          <li><span>Pootharekulu</span><span>₹ 200</span></li>
+        </ul>
+        <div class="foot"><span>— chef</span><span>served till sold out</span></div>
+      </div>
+    </div>
+
+    <div class="card c6">
+      <div class="lbl">06 · Storefront window</div>
+      <h3>Neon + vinyl · 800 mm</h3>
+      <div class="stage window-stage">
+        <div class="neon">
+          <div class="eye">Open</div>
+          <h2>Come <em>in.</em><br/>We're<br/>cooking.</h2>
+          <div class="hrs">Tue — Sun · 7:30 – 23:00<br/>Monday · closed</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card c6">
+      <div class="lbl">07 · Staff apron patch</div>
+      <h3>Embroidered · chest pocket</h3>
+      <div class="stage apron-stage">
+        <div class="apron">
+          <div class="patch">
+            <div class="eye">Kitchen</div>
+            <h4>Keerthi<br/>Chef-owner</h4>
+          </div>
+          <div class="foot">
+            <span>Telugu Theory · Hyderabad</span>
+            <img src="brand/logo-yellow-outline.png"/>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card c6">
+      <div class="lbl">08 · House rules poster</div>
+      <h3>A3 · framed · back wall</h3>
+      <div class="stage poster-stage">
+        <div class="poster">
+          <span class="eye">House rules</span>
+          <h2>Please <em>do</em><br/>the following.</h2>
+          <ol>
+            <li>Eat <em>with hands.</em> The food was made for them.</li>
+            <li>Order <em>one more</em> pappu than you think you need.</li>
+            <li>Be kind to the <em>server.</em> They haven't eaten either.</li>
+            <li>Save room for <em>double ka meetha.</em></li>
+            <li>Take leftovers <em>home</em> — biryani is better next morning.</li>
+            <li>Come back on <em>a Tuesday.</em> It's the chef's favourite day.</li>
+          </ol>
+          <div class="foot"><span>— The kitchen</span><span>Since 2024</span></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>
