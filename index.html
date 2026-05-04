@@ -2,396 +2,705 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<title>Telugu Theory — Website</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<title>Telugu Theory — Andhra · Telangana · Hyderabadi</title>
+<meta name="theme-color" content="#BE1E2D" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="brand/brand.css" />
 <style>
-  html, body { overflow-x: hidden; }
-  body { background: var(--tt-paper); }
+  /* ===========================================================
+     STAGE — show side-by-side phone previews on desktop;
+     on real mobile, page is full-bleed.
+  =========================================================== */
+  html, body { margin:0; }
+  body {
+    font-family: var(--font-body);
+    color: var(--tt-ink);
+    background: radial-gradient(circle at 30% 0%, #f0e0c5 0%, #e8d9c2 60%, #ddc9ac 100%);
+    -webkit-font-smoothing: antialiased;
+  }
+  .stage {
+    display:flex; gap: 24px; align-items: flex-start; justify-content: center; flex-wrap: wrap;
+    padding: 24px 24px 60px;
+  }
 
-  .nav { position: sticky; top: 0; z-index: 50; background: var(--tt-paper); border-bottom: 1px solid rgba(26,18,10,0.08); padding: 18px 56px; display:flex; align-items:center; justify-content:space-between; }
-  .nav .logo { display:flex; align-items:center; gap: 12px; }
-  .nav .logo img { width: 44px; height: 44px; border-radius: 8px; }
-  .nav .logo b { font-family: var(--font-head); font-weight: 700; font-size: 18px; letter-spacing: -0.01em; }
-  .nav ul { list-style: none; display:flex; gap: 32px; padding: 0; margin: 0; }
-  .nav ul a { text-decoration: none; color: var(--tt-ink); font-weight: 500; font-size: 14.5px; }
-  .nav .cta { display:flex; gap: 10px; align-items:center; }
-  .btn { background: var(--tt-red); color: var(--tt-cream); padding: 10px 18px; border-radius: 999px; text-decoration:none; font-weight: 600; font-size: 14px; border: 0; cursor: pointer; font-family: var(--font-body); }
-  .btn.ghost { background: transparent; color: var(--tt-ink); border: 1px solid rgba(26,18,10,0.2); }
-  .btn.yellow { background: var(--tt-yellow); color: var(--tt-sienna); }
-  .cart-pill { display:flex; align-items:center; gap: 6px; background: var(--tt-ink); color: var(--tt-cream); padding: 8px 14px; border-radius: 999px; font-size: 13px; font-weight: 600; }
-  .cart-pill .dot { background: var(--tt-yellow); color: var(--tt-sienna); width: 20px; height: 20px; border-radius: 999px; display:grid; place-items:center; font-size: 11px; font-weight: 700; }
+  /* The phone */
+  .phone {
+    width: 390px; height: 844px;
+    background: #111;
+    border-radius: 54px;
+    padding: 12px;
+    box-shadow: 0 0 0 2px #2a2a2a inset, 0 40px 80px -30px rgba(0,0,0,0.5), 0 0 0 1px rgba(0,0,0,0.4);
+    position: relative; flex-shrink: 0;
+  }
+  .phone::before {
+    content:''; position:absolute; top: 22px; left: 50%; transform: translateX(-50%);
+    width: 110px; height: 28px; border-radius: 999px; background: #000; z-index: 100;
+  }
+  .screen {
+    width: 100%; height: 100%;
+    border-radius: 42px;
+    overflow: hidden; background: var(--tt-paper);
+    position: relative;
+  }
+  .scroll {
+    height: 100%; overflow-y: auto; -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+  }
+  .scroll::-webkit-scrollbar { width: 0; }
 
-  /* Hero */
-  .hero { background: var(--tt-red); color: var(--tt-cream); padding: 80px 56px 100px; position: relative; overflow: hidden; }
-  .hero .eye { font-size: 12px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--tt-yellow); font-weight: 600; }
-  .hero h1 { font-size: clamp(56px, 9vw, 132px); line-height: 0.9; font-weight: 800; margin: 20px 0 28px; max-width: 1100px; letter-spacing: -0.025em; }
+  @media (max-width: 760px) {
+    body { background: var(--tt-paper); }
+    .stage { padding: 0; gap: 0; }
+    .phone {
+      width: 100%; height: auto; min-height: 100vh;
+      background: transparent; border-radius: 0; padding: 0; box-shadow: none;
+    }
+    .phone::before { display: none; }
+    .screen { border-radius: 0; height: auto; min-height: 100vh; }
+  }
+
+  /* ===========================================================
+     SITE — content inside the screen
+  =========================================================== */
+
+  /* Sticky top bar */
+  .topbar {
+    position: sticky; top: 0; z-index: 60;
+    background: var(--tt-paper);
+    padding: 14px 18px 12px;
+    display:flex; align-items: center; justify-content: space-between;
+    border-bottom: 1px solid rgba(136,45,24,0.08);
+  }
+  .topbar .brand { display: flex; align-items: center; gap: 10px; }
+  .topbar .brand img { width: 32px; height: 32px; border-radius: 6px; }
+  .topbar .brand b { font-family: var(--font-head); font-weight: 800; font-size: 16px; letter-spacing: -0.01em; }
+  .topbar .brand .te { display: block; font-size: 9px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--tt-sienna); font-weight: 700; margin-top: 1px; }
+  .topbar .menu-icon {
+    background: transparent; border: 0; width: 36px; height: 36px;
+    display:flex; align-items:center; justify-content:center;
+    color: var(--tt-ink); cursor: pointer;
+  }
+
+  /* HERO */
+  .hero {
+    background: var(--tt-red);
+    color: var(--tt-cream);
+    padding: 32px 22px 26px;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content:''; position: absolute; inset: 8px; border: 1px solid rgba(251,176,64,0.25); border-radius: 6px; pointer-events: none;
+  }
+  .hero .eye { font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--tt-yellow); font-weight: 700; position: relative; z-index: 2; }
+  .hero h1 {
+    font-family: var(--font-head); font-weight: 800;
+    font-size: 52px; line-height: 0.9; letter-spacing: -0.025em;
+    margin: 10px 0 0; color: var(--tt-cream); position: relative; z-index: 2;
+  }
   .hero h1 em { font-style: italic; color: var(--tt-yellow); font-weight: 500; }
-  .hero .row { display:grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: flex-end; margin-top: 40px; }
-  .hero p { font-size: 18px; line-height: 1.55; color: rgba(247,239,224,0.8); max-width: 520px; }
-  .hero .btns { display:flex; gap: 12px; margin-top: 28px; }
-  .hero .btns .btn.yellow:hover { filter: brightness(1.05); }
-  .hero .stats { display:grid; grid-template-columns: repeat(3,1fr); gap: 20px; padding: 28px 0; border-top: 1px solid rgba(251,176,64,0.25); }
-  .stat b { font-family: var(--font-head); font-size: 40px; color: var(--tt-yellow); font-weight: 700; display:block; line-height: 1; }
-  .stat span { font-size: 12.5px; color: rgba(247,239,224,0.7); letter-spacing: 0.08em; text-transform: uppercase; margin-top: 6px; display:block; }
-  .hero .mark { position: absolute; right: -60px; top: -60px; width: 420px; opacity: 0.08; }
-  .hero .mark img { width: 100%; }
+  .hero .lede {
+    margin-top: 14px; max-width: 320px;
+    font-size: 13.5px; line-height: 1.5;
+    color: rgba(247,239,224,0.82);
+    position: relative; z-index: 2;
+  }
+  .hero-meta {
+    margin-top: 18px;
+    display:flex; align-items: center; gap: 14px;
+    font-size: 11px; color: var(--tt-yellow);
+    letter-spacing: 0.16em; text-transform: uppercase; font-weight: 700;
+    position: relative; z-index: 2;
+  }
+  .hero-meta .dot { width: 8px; height: 8px; border-radius: 999px; background: #44C26A; box-shadow: 0 0 0 4px rgba(68,194,106,0.18); }
 
-  /* Section heads */
-  section.sec { padding: 96px 56px; }
-  .sechead { display:flex; justify-content:space-between; align-items: flex-end; margin-bottom: 48px; gap: 24px; flex-wrap: wrap; }
-  .sechead h2 { font-size: clamp(36px, 5vw, 64px); line-height: 0.95; font-weight: 800; color: var(--tt-ink); letter-spacing: -0.02em; max-width: 700px; }
-  .sechead h2 em { font-style: italic; color: var(--tt-red); font-weight: 500; }
-  .sechead p { max-width: 380px; color: var(--tt-muted); font-size: 15px; line-height: 1.55; }
+  /* PRIMARY ACTIONS */
+  .primary {
+    padding: 18px 14px 8px;
+    display:grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .primary .row { display:grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .pa {
+    appearance: none; -webkit-appearance: none;
+    text-decoration: none;
+    border-radius: 18px;
+    padding: 18px 18px 16px;
+    display:flex; flex-direction: column; gap: 10px;
+    cursor: pointer; border: 0;
+    font-family: var(--font-body); text-align: left;
+    color: inherit;
+    transition: transform 0.1s;
+    position: relative; overflow: hidden;
+    min-height: 130px;
+  }
+  .pa:active { transform: scale(0.985); }
+  .pa .ic {
+    width: 38px; height: 38px;
+    border-radius: 999px;
+    display:flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .pa .ic svg { width: 20px; height: 20px; }
+  .pa h3 {
+    font-family: var(--font-head); font-weight: 800;
+    font-size: 19px; line-height: 1; letter-spacing: -0.01em;
+    margin: 0;
+  }
+  .pa p { font-size: 11.5px; line-height: 1.4; margin: 0; opacity: 0.8; }
+  .pa .arrow { margin-top: auto; font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; display:flex; align-items:center; gap: 4px; }
 
-  /* Category pills */
-  .cats { display:flex; gap: 8px; flex-wrap: wrap; margin-bottom: 28px; }
-  .cats button { border: 1px solid rgba(26,18,10,0.15); background: transparent; padding: 8px 16px; border-radius: 999px; font: inherit; font-size: 13.5px; color: var(--tt-ink); cursor: pointer; font-weight: 500; }
-  .cats button.active { background: var(--tt-ink); color: var(--tt-cream); border-color: var(--tt-ink); }
+  .pa.order { background: var(--tt-red); color: var(--tt-cream); grid-column: 1 / -1; min-height: 110px; flex-direction: row; align-items: center; gap: 16px; }
+  .pa.order .body { flex: 1; display:flex; flex-direction: column; gap: 6px; }
+  .pa.order .ic { background: var(--tt-yellow); color: var(--tt-sienna); width: 52px; height: 52px; }
+  .pa.order .ic svg { width: 26px; height: 26px; }
+  .pa.order h3 { font-size: 22px; color: var(--tt-cream); }
+  .pa.order p { color: rgba(247,239,224,0.78); }
+  .pa.order .arrow { color: var(--tt-yellow); }
 
-  /* Dish grid */
-  .dishes { display:grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-  .dcard { background: #fff; border-radius: 18px; overflow: hidden; display:flex; flex-direction:column; position: relative; border: 1px solid rgba(26,18,10,0.05); }
-  .dcard .img { aspect-ratio: 5/4; background: var(--tt-cream); position: relative; overflow: hidden; }
-  .dcard .img.a { background: repeating-linear-gradient(45deg, #e8c893 0 14px, #ddb77c 14px 28px); }
-  .dcard .img.b { background: repeating-linear-gradient(45deg, #b15f40 0 14px, #9e4f34 14px 28px); }
-  .dcard .img.c { background: repeating-linear-gradient(45deg, #5f6c37 0 14px, #4e5a2d 14px 28px); }
-  .dcard .img.d { background: repeating-linear-gradient(45deg, #4c547a 0 14px, #3e4666 14px 28px); }
-  .dcard .img.e { background: repeating-linear-gradient(45deg, #dca15d 0 14px, #c58c4a 14px 28px); }
-  .dcard .img.f { background: repeating-linear-gradient(45deg, #882d18 0 14px, #6e2414 14px 28px); }
-  .dcard .img::after { content: attr(data-label); position: absolute; inset: 0; display:grid; place-items:center; color: rgba(255,255,255,0.7); font-family: ui-monospace, monospace; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; }
-  .dcard .badge { position: absolute; top: 12px; left: 12px; padding: 5px 10px; background: var(--tt-red); color: var(--tt-cream); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; border-radius: 999px; font-weight: 600; }
-  .dcard .badge.yellow { background: var(--tt-yellow); color: var(--tt-sienna); }
-  .dcard .veg-mark { position: absolute; top: 12px; right: 12px; width: 18px; height: 18px; border: 2px solid #2f7a2f; background: #fff; display:flex; align-items:center; justify-content:center; border-radius: 3px; }
-  .dcard .veg-mark::after { content:''; width: 8px; height: 8px; background: #2f7a2f; border-radius: 999px; }
-  .dcard .veg-mark.nv { border-color: #a93226; }
-  .dcard .veg-mark.nv::after { background: #a93226; }
-  .dcard .info { padding: 18px 18px 20px; display:flex; flex-direction:column; gap: 8px; flex: 1; }
-  .dcard h3 { font-family: var(--font-head); font-size: 20px; font-weight: 700; }
-  .dcard .desc { font-size: 13.5px; color: var(--tt-muted); line-height: 1.5; flex: 1; }
-  .dcard .foot { display:flex; align-items:center; justify-content:space-between; margin-top: 6px; }
-  .dcard .price { font-family: var(--font-head); font-weight: 700; font-size: 20px; color: var(--tt-red); }
-  .dcard .add { background: var(--tt-ink); color: var(--tt-cream); border: 0; padding: 9px 16px; border-radius: 999px; font: inherit; font-size: 13px; font-weight: 600; cursor: pointer; }
-  .dcard .add.on { background: var(--tt-red); }
+  .pa.directions { background: var(--tt-forest); color: var(--tt-cream); }
+  .pa.directions .ic { background: var(--tt-yellow); color: var(--tt-forest); }
+  .pa.directions h3 { color: var(--tt-cream); }
+  .pa.directions p { color: rgba(247,239,224,0.75); }
+  .pa.directions .arrow { color: var(--tt-yellow); }
 
-  /* About band */
-  .band { background: var(--tt-forest); color: var(--tt-cream); padding: 96px 56px; display:grid; grid-template-columns: 1.1fr 1fr; gap: 64px; align-items: center; }
-  .band img.ph { width: 100%; aspect-ratio: 4/5; object-fit: cover; border-radius: 18px; background: repeating-linear-gradient(45deg, #3a4925 0 12px, #2a3619 12px 24px); display:block; }
-  .band .ph { aspect-ratio: 4/5; background: repeating-linear-gradient(45deg, #3a4925 0 12px, #2a3619 12px 24px); border-radius: 18px; display:grid; place-items:center; color: rgba(251,176,64,0.5); font-family: ui-monospace, monospace; font-size: 12px; letter-spacing: 0.2em; }
-  .band .eye { font-size: 12px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--tt-yellow); font-weight: 600; }
-  .band h2 { font-size: clamp(36px, 4.5vw, 60px); line-height: 0.98; margin: 18px 0 22px; color: var(--tt-cream); letter-spacing: -0.02em; }
-  .band h2 em { font-style: italic; color: var(--tt-yellow); font-weight: 500; }
-  .band p { font-size: 16px; line-height: 1.7; color: rgba(247,239,224,0.8); margin: 0 0 16px; }
+  .pa.reserve { background: var(--tt-yellow); color: var(--tt-sienna); }
+  .pa.reserve .ic { background: var(--tt-red); color: var(--tt-cream); }
+  .pa.reserve h3 { color: var(--tt-sienna); }
+  .pa.reserve p { color: var(--tt-sienna); opacity: 0.8; }
+  .pa.reserve .arrow { color: var(--tt-red); }
 
-  /* Reservation + hours */
-  .booking { display:grid; grid-template-columns: 1fr 1fr; gap: 32px; padding: 96px 56px; background: var(--tt-cream); }
-  .booking .card { background: var(--tt-paper); border: 1px solid rgba(26,18,10,0.08); border-radius: 18px; padding: 32px; }
-  .booking h3 { font-family: var(--font-head); font-size: 28px; margin-bottom: 16px; font-weight: 700; }
-  .booking .fields { display:grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-  .booking label { font-size: 11.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--tt-muted); font-weight: 600; }
-  .booking input, .booking select { width: 100%; border: 1px solid rgba(26,18,10,0.15); background: #fff; padding: 11px 12px; border-radius: 10px; font: inherit; font-size: 14px; margin-top: 5px; }
-  .booking .full { grid-column: 1 / -1; }
-  .hours { display:grid; grid-template-columns: auto 1fr; gap: 14px 20px; font-size: 14.5px; }
-  .hours b { color: var(--tt-red); font-family: var(--font-head); font-weight: 600; }
+  /* Quick row */
+  .quickrow {
+    display:flex; gap: 8px;
+    padding: 6px 14px 16px;
+  }
+  .qa {
+    flex: 1; background: var(--tt-paper);
+    border: 1px solid rgba(136,45,24,0.18);
+    border-radius: 14px;
+    padding: 10px 8px;
+    display: flex; flex-direction: column; align-items: center; gap: 4px;
+    text-decoration: none; color: var(--tt-sienna);
+    cursor: pointer;
+    font-family: var(--font-body); font-size: 11px; font-weight: 700;
+    letter-spacing: 0.06em;
+  }
+  .qa svg { width: 18px; height: 18px; }
+  .qa:active { transform: scale(0.96); }
 
-  /* Testimonials */
-  .quotes { padding: 96px 56px; background: var(--tt-red); color: var(--tt-cream); }
-  .quotes h2 { color: var(--tt-cream); font-size: clamp(36px, 4.5vw, 64px); letter-spacing: -0.02em; max-width: 860px; line-height: 1; }
-  .quotes h2 em { color: var(--tt-yellow); font-style: italic; font-weight: 500; }
-  .qgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 56px; }
-  .q { background: rgba(255,255,255,0.05); border: 1px solid rgba(251,176,64,0.25); padding: 28px; border-radius: 18px; }
-  .q p { font-family: var(--font-head); font-size: 22px; line-height: 1.25; font-style: italic; font-weight: 500; }
-  .q .src { margin-top: 18px; font-size: 13px; color: var(--tt-yellow); letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600; }
-  .stars { color: var(--tt-yellow); font-size: 14px; margin-bottom: 14px; letter-spacing: 0.2em; }
+  /* Status strip */
+  .status {
+    margin: 0 14px 18px;
+    background: var(--tt-cream);
+    border: 1px solid rgba(136,45,24,0.14);
+    border-radius: 14px;
+    padding: 14px 16px;
+    display:flex; align-items: center; gap: 12px;
+  }
+  .status .pulse { width: 10px; height: 10px; border-radius: 999px; background: #44C26A; box-shadow: 0 0 0 4px rgba(68,194,106,0.2); flex-shrink: 0; }
+  .status .pulse.closed { background: var(--tt-red); box-shadow: 0 0 0 4px rgba(190,30,45,0.2); }
+  .status .text { flex: 1; font-size: 12.5px; line-height: 1.4; }
+  .status .text b { font-family: var(--font-head); font-size: 13px; color: var(--tt-ink); display: block; }
+  .status .text span { color: var(--tt-muted); }
+  .status a { color: var(--tt-red); font-weight: 700; text-decoration: none; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; }
+
+  /* Section titles */
+  .sec { padding: 18px 18px 6px; }
+  .sec-head {
+    display:flex; align-items: baseline; justify-content: space-between;
+    margin-bottom: 12px;
+  }
+  .sec-head h2 { font-family: var(--font-head); font-weight: 800; font-size: 19px; color: var(--tt-red); letter-spacing: -0.01em; }
+  .sec-head a { font-size: 11px; color: var(--tt-sienna); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; }
+
+  /* Signature picks */
+  .picks {
+    display: flex; gap: 12px;
+    overflow-x: auto; -webkit-overflow-scrolling: touch;
+    padding: 0 18px 18px;
+    scrollbar-width: none;
+  }
+  .picks::-webkit-scrollbar { display: none; }
+  .pick {
+    flex-shrink: 0; width: 200px;
+    background: #fff;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid rgba(136,45,24,0.08);
+    display:flex; flex-direction: column;
+  }
+  .pick .img {
+    aspect-ratio: 5/4;
+    position: relative;
+    display:flex; align-items: flex-end; padding: 10px;
+    color: rgba(255,255,255,0.85);
+    font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; font-family: ui-monospace, monospace;
+  }
+  .pick.a .img { background: repeating-linear-gradient(45deg, #b15f40 0 12px, #9e4f34 12px 24px); }
+  .pick.b .img { background: repeating-linear-gradient(45deg, #5f6c37 0 12px, #4e5a2d 12px 24px); }
+  .pick.c .img { background: repeating-linear-gradient(45deg, #882d18 0 12px, #6e2414 12px 24px); }
+  .pick.d .img { background: repeating-linear-gradient(45deg, #dca15d 0 12px, #c58c4a 12px 24px); }
+  .pick .img .sig {
+    position: absolute; top: 10px; left: 10px;
+    background: var(--tt-yellow); color: var(--tt-sienna);
+    padding: 3px 8px; border-radius: 999px;
+    font-family: var(--font-body); font-size: 8.5px; letter-spacing: 0.18em; font-weight: 800; text-transform: uppercase;
+  }
+  .pick .info { padding: 12px 14px 14px; display:flex; flex-direction: column; gap: 4px; }
+  .pick h4 { font-family: var(--font-head); font-size: 14px; font-weight: 700; color: var(--tt-ink); line-height: 1.2; }
+  .pick .te { font-family: var(--font-body); font-size: 11px; color: var(--tt-sienna); }
+  .pick .pr { margin-top: 6px; font-family: var(--font-head); font-weight: 800; color: var(--tt-red); font-size: 14px; }
+
+  /* Visit card */
+  .visit {
+    margin: 0 14px 18px;
+    background: #fff;
+    border-radius: 16px; overflow: hidden;
+    border: 1px solid rgba(136,45,24,0.1);
+  }
+  .visit .map {
+    height: 170px;
+    background:
+      linear-gradient(180deg, rgba(232,217,194,0.4) 0%, rgba(220,200,170,0.6) 100%),
+      repeating-linear-gradient(0deg, rgba(136,45,24,0.06) 0 1px, transparent 1px 26px),
+      repeating-linear-gradient(90deg, rgba(136,45,24,0.06) 0 1px, transparent 1px 26px),
+      #ecdcc1;
+    position: relative;
+  }
+  .visit .map::before {
+    content:''; position: absolute; left: -10%; right: -10%; top: 55%;
+    height: 14px; background: var(--tt-paper); transform: rotate(-8deg);
+    box-shadow: 0 0 0 1px rgba(136,45,24,0.1);
+  }
+  .visit .map::after {
+    content:''; position: absolute; left: 30%; top: -10%; width: 14px; bottom: -10%;
+    background: var(--tt-paper); transform: rotate(8deg);
+    box-shadow: 0 0 0 1px rgba(136,45,24,0.1);
+  }
+  .visit .pin {
+    position: absolute; left: 50%; top: 50%;
+    transform: translate(-50%, -100%);
+    z-index: 2;
+    display:flex; flex-direction: column; align-items: center;
+  }
+  .visit .pin .blob {
+    background: var(--tt-red); color: var(--tt-cream);
+    width: 36px; height: 36px; border-radius: 999px 999px 999px 4px;
+    transform: rotate(-45deg);
+    display:flex; align-items: center; justify-content: center;
+    box-shadow: 0 6px 18px rgba(190,30,45,0.45);
+  }
+  .visit .pin .blob span { transform: rotate(45deg); font-family: var(--font-head); font-weight: 800; color: var(--tt-yellow); }
+  .visit .pin .shadow { width: 14px; height: 5px; border-radius: 999px; background: rgba(0,0,0,0.18); margin-top: 4px; filter: blur(2px); }
+  .visit .body { padding: 16px 18px 18px; }
+  .visit .body .area { font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--tt-yellow); background: var(--tt-sienna); padding: 3px 8px; border-radius: 999px; font-weight: 800; display: inline-block; }
+  .visit .body h3 { font-family: var(--font-head); font-size: 20px; font-weight: 800; color: var(--tt-ink); margin: 8px 0 4px; }
+  .visit .body p { font-size: 12.5px; line-height: 1.5; color: var(--tt-muted); margin: 0 0 14px; }
+  .visit .body .actions { display:flex; gap: 8px; }
+  .visit .body .actions a {
+    flex: 1; text-align: center; padding: 11px 10px;
+    background: var(--tt-ink); color: var(--tt-cream);
+    border-radius: 999px; text-decoration: none;
+    font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+  }
+  .visit .body .actions a.alt { background: transparent; color: var(--tt-sienna); border: 1px solid rgba(136,45,24,0.25); }
+
+  /* Hours */
+  .hours-card {
+    margin: 0 14px 18px;
+    background: var(--tt-forest); color: var(--tt-cream);
+    border-radius: 16px; padding: 18px;
+  }
+  .hours-card h3 { font-family: var(--font-head); font-size: 11px; color: var(--tt-yellow); letter-spacing: 0.22em; text-transform: uppercase; font-weight: 800; margin-bottom: 10px; }
+  .hours-card .row { display:flex; justify-content: space-between; padding: 6px 0; font-size: 13px; border-bottom: 1px dashed rgba(251,176,64,0.18); }
+  .hours-card .row:last-of-type { border-bottom: 0; }
+  .hours-card .row b { font-family: var(--font-body); font-weight: 600; color: var(--tt-cream); }
+  .hours-card .row span { color: rgba(247,239,224,0.7); }
+  .hours-card .row.now b { color: var(--tt-yellow); }
+  .hours-card .row.now span { color: var(--tt-yellow); }
+
+  /* Reviews */
+  .reviews {
+    background: var(--tt-yellow); color: var(--tt-sienna);
+    padding: 22px 22px 24px;
+    margin-top: 8px;
+  }
+  .reviews .stars { font-size: 14px; letter-spacing: 0.2em; color: var(--tt-red); }
+  .reviews h2 { font-family: var(--font-head); font-size: 26px; font-weight: 800; line-height: 1; letter-spacing: -0.01em; margin: 6px 0 4px; color: var(--tt-sienna); }
+  .reviews h2 em { font-style: italic; color: var(--tt-red); font-weight: 500; }
+  .reviews .sub { font-size: 12.5px; opacity: 0.85; margin-bottom: 16px; }
+  .quote { background: rgba(255,255,255,0.4); border-radius: 14px; padding: 14px 16px; margin-bottom: 8px; }
+  .quote p { font-family: var(--font-head); font-style: italic; font-size: 14px; line-height: 1.4; margin: 0 0 8px; }
+  .quote .src { font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 700; color: var(--tt-red); }
 
   /* Footer */
-  footer { background: var(--tt-ink); color: rgba(247,239,224,0.65); padding: 72px 56px 40px; }
-  .fgrid { display:grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 56px; }
-  footer h4 { color: var(--tt-yellow); font-family: var(--font-head); font-size: 13px; letter-spacing: 0.22em; text-transform: uppercase; margin-bottom: 14px; font-weight: 700; }
-  footer ul { list-style: none; padding: 0; margin: 0; }
-  footer li { padding: 4px 0; font-size: 14px; }
-  footer a { color: inherit; text-decoration: none; }
-  footer .brandline { font-family: var(--font-head); font-size: 32px; color: var(--tt-cream); margin-bottom: 10px; font-weight: 700; letter-spacing: -0.01em; }
-  .fend { display:flex; justify-content:space-between; padding-top: 28px; border-top: 1px solid rgba(247,239,224,0.15); font-size: 12.5px; letter-spacing: 0.12em; text-transform: uppercase; }
-
-  /* Cart drawer */
-  .drawer { position: fixed; right: 20px; bottom: 20px; width: 380px; max-width: calc(100vw - 40px); background: #fff; border-radius: 20px; box-shadow: 0 40px 80px -20px rgba(0,0,0,0.35); padding: 20px; z-index: 80; transform: translateY(130%); transition: transform .3s ease; border: 1px solid rgba(26,18,10,0.06); }
-  .drawer.open { transform: translateY(0); }
-  .drawer h4 { font-family: var(--font-head); font-size: 20px; font-weight: 700; }
-  .drawer .line { display:flex; justify-content:space-between; gap: 10px; align-items:center; padding: 10px 0; border-bottom: 1px dashed rgba(26,18,10,0.12); font-size: 14px; }
-  .drawer .line:last-of-type { border-bottom: 0; }
-  .drawer .line button { background: rgba(190,30,45,0.08); color: var(--tt-red); border: 0; width: 24px; height: 24px; border-radius: 999px; font: inherit; cursor: pointer; font-weight: 600; }
-  .drawer .total { display:flex; justify-content:space-between; margin-top: 10px; padding-top: 14px; border-top: 2px solid var(--tt-ink); font-family: var(--font-head); font-weight: 700; font-size: 18px; }
-  .drawer .checkout { display:block; width: 100%; text-align:center; margin-top: 14px; background: var(--tt-red); color: var(--tt-cream); padding: 14px; border-radius: 12px; text-decoration: none; font-weight: 600; }
-  .drawer .empty { padding: 18px 0; color: var(--tt-muted); font-size: 14px; }
-  .drawer .close { position: absolute; right: 16px; top: 16px; background: transparent; border: 0; font-size: 20px; cursor: pointer; color: var(--tt-muted); }
-
-  @media (max-width: 900px) {
-    .nav ul, .nav .cta .ghost { display: none; }
-    .nav { padding: 12px 20px; }
-    section.sec, .hero, .band, .booking, .quotes, footer { padding-left: 20px; padding-right: 20px; }
-    .hero .row, .dishes, .qgrid, .band, .booking, .fgrid { grid-template-columns: 1fr; gap: 20px; }
-    .booking .fields { grid-template-columns: 1fr; }
-    .hero { padding-top: 48px; padding-bottom: 56px; }
-    .band { padding-top: 56px; padding-bottom: 56px; }
-    .quotes { padding-top: 56px; padding-bottom: 56px; }
-    section.sec { padding-top: 56px; padding-bottom: 56px; }
-    footer { padding-top: 48px; padding-bottom: 32px; }
+  .foot {
+    background: var(--tt-ink); color: rgba(247,239,224,0.7);
+    padding: 24px 22px 32px;
   }
-  @media (max-width: 600px) {
-    .dishes { grid-template-columns: 1fr; }
-    /* Keep 3 cols so the third stat doesn't orphan in a 2-col row */
-    .hero .stats { grid-template-columns: repeat(3, 1fr); gap: 12px; }
-    .stat b { font-size: 22px; }
-    .hero h1 { font-size: clamp(40px, 11vw, 72px); }
-    .drawer { width: calc(100vw - 24px); right: 12px; }
-    /* Footer bottom row — stack vertically so both lines fit */
-    .fend { flex-direction: column; gap: 6px; align-items: flex-start; }
-    /* Booking card — reduce inner padding so form fields aren't squeezed */
-    .booking .card { padding: 20px; }
+  .foot .ttl { font-family: var(--font-head); font-size: 22px; color: var(--tt-cream); font-weight: 800; letter-spacing: -0.01em; }
+  .foot .te { font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--tt-yellow); margin: 4px 0 14px; font-weight: 700; }
+  .foot p { font-size: 12.5px; line-height: 1.55; margin: 0 0 14px; max-width: 280px; }
+  .foot .socials { display:flex; gap: 8px; margin-bottom: 18px; }
+  .foot .socials a {
+    width: 36px; height: 36px; border-radius: 999px;
+    border: 1px solid rgba(247,239,224,0.2);
+    color: var(--tt-cream);
+    display:flex; align-items: center; justify-content: center;
+    text-decoration: none;
   }
+  .foot .copy { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(247,239,224,0.4); padding-top: 14px; border-top: 1px solid rgba(247,239,224,0.1); margin-top: 6px; }
+
+  /* Sticky bottom action bar */
+  .stickybar {
+    position: sticky; bottom: 0; z-index: 50;
+    background: rgba(251,246,236,0.96);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(136,45,24,0.12);
+    padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+    display: flex; gap: 8px;
+  }
+  .stickybar a {
+    flex: 1; height: 44px;
+    border-radius: 999px;
+    display:flex; align-items: center; justify-content: center;
+    text-decoration: none;
+    font-family: var(--font-body); font-weight: 700;
+    font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;
+    gap: 6px;
+  }
+  .stickybar a svg { width: 14px; height: 14px; }
+  .stickybar a.dir { background: transparent; color: var(--tt-sienna); border: 1px solid rgba(136,45,24,0.25); }
+  .stickybar a.res { background: var(--tt-ink); color: var(--tt-cream); }
+  .stickybar a.ord { background: var(--tt-red); color: var(--tt-cream); flex: 1.2; }
+
+  /* Drawer */
+  .drawer-overlay {
+    position: absolute; inset: 0; background: rgba(26,18,10,0.4);
+    opacity: 0; pointer-events: none; transition: opacity 0.25s;
+    z-index: 80;
+  }
+  .drawer-overlay.open { opacity: 1; pointer-events: auto; }
+  .drawer {
+    position: absolute; top: 0; right: 0; bottom: 0;
+    width: 78%;
+    background: var(--tt-paper);
+    z-index: 81;
+    transform: translateX(100%);
+    transition: transform 0.3s cubic-bezier(0.2,0.9,0.3,1);
+    padding: 20px 22px;
+    display:flex; flex-direction: column;
+  }
+  .drawer.open { transform: translateX(0); }
+  .drawer .close {
+    background: transparent; border: 0; font-size: 22px;
+    color: var(--tt-ink); align-self: flex-end;
+    cursor: pointer; margin-bottom: 8px;
+  }
+  .drawer .ttl { font-family: var(--font-head); font-size: 24px; font-weight: 800; color: var(--tt-red); letter-spacing: -0.01em; }
+  .drawer ul { list-style: none; padding: 0; margin: 18px 0 0; }
+  .drawer li { padding: 14px 0; border-bottom: 1px dashed rgba(136,45,24,0.18); }
+  .drawer li a { font-family: var(--font-head); font-size: 18px; font-weight: 700; color: var(--tt-ink); text-decoration: none; display:flex; align-items: center; justify-content: space-between; }
+  .drawer li a span { color: var(--tt-sienna); font-size: 12px; font-family: var(--font-body); font-weight: 600; letter-spacing: 0.04em; }
+  .drawer .foot-info { margin-top: auto; font-size: 12px; color: var(--tt-muted); line-height: 1.5; }
+  .drawer .foot-info b { color: var(--tt-ink); display: block; font-family: var(--font-head); }
 </style>
 </head>
 <body>
-<nav class="nav">
-  <div class="logo"><img src="brand/logo-red-square.png"/><b>Telugu Theory</b></div>
-  <ul>
-    <li><a href="#menu">Menu</a></li>
-    <li><a href="#about">Our Story</a></li>
-    <li><a href="#visit">Visit</a></li>
-    <li><a href="#reviews">Reviews</a></li>
-  </ul>
-  <div class="cta">
-    <a href="#visit" class="btn ghost">Reserve</a>
-    <button class="cart-pill" id="cartBtn"><span>Cart</span> <span class="dot" id="cartCount">0</span></button>
-  </div>
-</nav>
 
-<section class="hero">
-  <div class="mark"><img src="brand/logo-yellow-outline.png"/></div>
-  <span class="eye">Andhra · Telangana · Rayalaseema</span>
-  <h1>Home cooking,<br/><em>held to</em> restaurant<br/>standards.</h1>
-  <div class="row">
-    <div>
-      <p>Twenty-six dishes from a Telugu grandmother's kitchen, cooked in small batches, served on brass. Order ahead or pull up a chair — either way, dinner takes its time.</p>
-      <div class="btns">
-        <a class="btn yellow" href="#menu">Order online</a>
-        <a class="btn" style="background: transparent; border:1px solid rgba(247,239,224,0.4); color: var(--tt-cream)" href="#visit">Book a table</a>
+<div class="stage">
+  <div class="phone">
+    <div class="screen">
+
+      <!-- Drawer + overlay -->
+      <div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
+      <aside class="drawer" id="drawer">
+        <button class="close" onclick="closeDrawer()">×</button>
+        <div class="ttl">Telugu<br/>Theory.</div>
+        <ul>
+          <li><a href="#order">Order online <span>›</span></a></li>
+          <li><a href="#reserve">Reserve a table <span>›</span></a></li>
+          <li><a href="#order">Full menu <span>›</span></a></li>
+          <li><a href="#visit">Visit us <span>›</span></a></li>
+          <li><a href="#story">Our story <span>›</span></a></li>
+          <li><a href="tel:+914044000007">Call kitchen <span>+91 40 4400 0007</span></a></li>
+        </ul>
+        <div class="foot-info">
+          <b>Plot 14, Road No. 1</b>
+          Banjara Hills, Hyderabad 500034<br/>
+          @telugu.theory · hello@teluguthy.in
+        </div>
+      </aside>
+
+      <div class="scroll">
+
+        <!-- TOP BAR -->
+        <header class="topbar">
+          <div class="brand">
+            <img src="brand/logo-red-square.png" alt=""/>
+            <div>
+              <b>Telugu Theory</b>
+              <span class="te">తెలుగు థియరీ</span>
+            </div>
+          </div>
+          <button class="menu-icon" onclick="openDrawer()" aria-label="Menu">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+          </button>
+        </header>
+
+        <!-- HERO -->
+        <section class="hero">
+          <div class="eye">Andhra · Telangana · Hyderabadi</div>
+          <h1>Home cooking,<br/><em>on brass.</em></h1>
+          <p class="lede">A small kitchen in Banjara Hills, with the patience of a grandmother and the discipline of a restaurant.</p>
+          <div class="hero-meta">
+            <span class="dot"></span>
+            <span>Open now · Until 23:00</span>
+          </div>
+        </section>
+
+        <!-- PRIMARY ACTIONS -->
+        <section class="primary">
+          <div class="row">
+            <a class="pa directions" href="https://maps.google.com/?q=Telugu+Theory+Banjara+Hills+Hyderabad" target="_blank" rel="noopener">
+              <div class="ic">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              </div>
+              <h3>Directions</h3>
+              <p>Banjara Hills · 4 km from KBR</p>
+              <div class="arrow">Open in Maps →</div>
+            </a>
+
+            <a class="pa reserve" href="#reserve">
+              <div class="ic">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 11h18"/></svg>
+              </div>
+              <h3>Reserve a table</h3>
+              <p>Tonight or this weekend</p>
+              <div class="arrow">Pick a time →</div>
+            </a>
+          </div>
+
+          <a class="pa order" href="#order">
+            <div class="ic">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18l-2 12H5L3 6z"/><path d="M9 6V3h6v3"/><path d="M9 11v4M15 11v4"/></svg>
+            </div>
+            <div class="body">
+              <h3>Order food</h3>
+              <p>Delivery in 35–45 min · across Hyderabad</p>
+              <div class="arrow">Browse menu →</div>
+            </div>
+          </a>
+        </section>
+
+        <!-- QUICK ROW -->
+        <div class="quickrow">
+          <a class="qa" href="tel:+914044000007">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.33 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/></svg>
+            Call
+          </a>
+          <a class="qa" href="https://wa.me/914044000007" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+            WhatsApp
+          </a>
+          <a class="qa" href="#order">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v4H4zM4 12h16v4H4zM4 20h10"/></svg>
+            Menu
+          </a>
+        </div>
+
+        <!-- STATUS -->
+        <div class="status">
+          <span class="pulse"></span>
+          <div class="text">
+            <b>Open for dinner</b>
+            <span>Until 23:00 · Last seating 22:15</span>
+          </div>
+          <a href="#hours">Hours</a>
+        </div>
+
+        <!-- SIGNATURE PICKS -->
+        <section class="sec" id="order">
+          <div class="sec-head">
+            <h2>Signature picks</h2>
+            <a href="#order">Full menu →</a>
+          </div>
+        </section>
+        <div class="picks">
+          <div class="pick a">
+            <div class="img"><span class="sig">Signature</span>biryani · mutton</div>
+            <div class="info">
+              <h4>TT Special Mutton<br/>Dum Biryani</h4>
+              <span class="te">బిర్యానీ</span>
+              <span class="pr">₹ 640</span>
+            </div>
+          </div>
+          <div class="pick c">
+            <div class="img"><span class="sig">Signature</span>andhra · mutton</div>
+            <div class="info">
+              <h4>Gongura Mutton</h4>
+              <span class="te">గోంగూర మాంసం</span>
+              <span class="pr">₹ 580</span>
+            </div>
+          </div>
+          <div class="pick b">
+            <div class="img"><span class="sig">Signature</span>andhra · chicken</div>
+            <div class="info">
+              <h4>Pachi Mirchi Kodi</h4>
+              <span class="te">పచ్చి మిర్చి కోడి</span>
+              <span class="pr">₹ 380</span>
+            </div>
+          </div>
+          <div class="pick d">
+            <div class="img"><span class="sig">Signature</span>sweet · classic</div>
+            <div class="info">
+              <h4>Shahi Tukda</h4>
+              <span class="te">షాహీ టుక్డా</span>
+              <span class="pr">₹ 240</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- VISIT -->
+        <section class="sec" id="visit" style="padding-bottom: 0">
+          <div class="sec-head">
+            <h2>Visit us</h2>
+            <a href="https://maps.google.com/?q=Telugu+Theory+Banjara+Hills+Hyderabad">Maps →</a>
+          </div>
+        </section>
+        <div class="visit">
+          <div class="map">
+            <div class="pin">
+              <div class="blob"><span>★</span></div>
+              <div class="shadow"></div>
+            </div>
+          </div>
+          <div class="body">
+            <span class="area">Banjara Hills</span>
+            <h3>Plot 14, Road No. 1</h3>
+            <p>Hyderabad 500034 · Valet after 19:00 · 2.4 km from Khairatabad metro</p>
+            <div class="actions">
+              <a href="https://maps.google.com/?q=Telugu+Theory+Banjara+Hills+Hyderabad" target="_blank" rel="noopener">Get directions</a>
+              <a class="alt" href="tel:+914044000007">Call</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- HOURS -->
+        <section class="sec" id="hours" style="padding-bottom: 0">
+          <div class="sec-head">
+            <h2>Open today</h2>
+          </div>
+        </section>
+        <div class="hours-card">
+          <h3>Hours</h3>
+          <div class="row"><b>Mon</b><span>Dinner only · 19:00 — 23:00</span></div>
+          <div class="row now"><b>Tue · Today</b><span>12:00 — 15:30 · 19:00 — 23:00</span></div>
+          <div class="row"><b>Wed — Sun</b><span>12:00 — 15:30 · 19:00 — 23:00</span></div>
+          <div class="row"><b>Thali</b><span>Mon — Fri · 12:30 — 15:30</span></div>
+        </div>
+
+        <!-- RESERVE -->
+        <section class="sec" id="reserve" style="padding-bottom: 6px">
+          <div class="sec-head">
+            <h2>Reserve a table</h2>
+          </div>
+          <p style="font-size: 12.5px; color: var(--tt-muted); margin: -6px 0 14px; line-height: 1.5;">Online for parties up to 8. Larger groups, please call.</p>
+        </section>
+        <div style="margin: 0 14px 18px; background: #fff; border: 1px solid rgba(136,45,24,0.1); border-radius: 16px; padding: 16px;">
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px;">
+            <div>
+              <label style="font-size:9.5px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 700; color: var(--tt-muted);">Date</label>
+              <input type="date" style="width: 100%; margin-top: 4px; padding: 10px; border: 1px solid rgba(136,45,24,0.18); border-radius: 10px; font: inherit; font-size: 13px; box-sizing: border-box;"/>
+            </div>
+            <div>
+              <label style="font-size:9.5px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 700; color: var(--tt-muted);">Time</label>
+              <select style="width: 100%; margin-top: 4px; padding: 10px; border: 1px solid rgba(136,45,24,0.18); border-radius: 10px; font: inherit; font-size: 13px; box-sizing: border-box;">
+                <option>19:00</option><option>19:30</option><option selected>20:00</option><option>20:30</option><option>21:00</option>
+              </select>
+            </div>
+            <div>
+              <label style="font-size:9.5px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 700; color: var(--tt-muted);">Guests</label>
+              <select style="width: 100%; margin-top: 4px; padding: 10px; border: 1px solid rgba(136,45,24,0.18); border-radius: 10px; font: inherit; font-size: 13px; box-sizing: border-box;">
+                <option>2</option><option selected>4</option><option>6</option><option>8</option>
+              </select>
+            </div>
+            <div>
+              <label style="font-size:9.5px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 700; color: var(--tt-muted);">Seating</label>
+              <select style="width: 100%; margin-top: 4px; padding: 10px; border: 1px solid rgba(136,45,24,0.18); border-radius: 10px; font: inherit; font-size: 13px; box-sizing: border-box;">
+                <option>Indoor</option><option>Courtyard</option>
+              </select>
+            </div>
+          </div>
+          <input placeholder="Name" style="width: 100%; padding: 11px 12px; border: 1px solid rgba(136,45,24,0.18); border-radius: 10px; font: inherit; font-size: 13px; margin-bottom: 8px; box-sizing: border-box;"/>
+          <input placeholder="Phone (+91)" style="width: 100%; padding: 11px 12px; border: 1px solid rgba(136,45,24,0.18); border-radius: 10px; font: inherit; font-size: 13px; margin-bottom: 12px; box-sizing: border-box;"/>
+          <button style="width:100%; padding: 14px; background: var(--tt-red); color: var(--tt-cream); border: 0; border-radius: 999px; font-family: var(--font-body); font-weight: 700; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer;">Confirm booking</button>
+        </div>
+
+        <!-- REVIEWS -->
+        <section class="reviews">
+          <div class="stars">★ ★ ★ ★ ★</div>
+          <h2>4.8 on Google.<br/><em>2,400 reviews.</em></h2>
+          <p class="sub">A few of the kinder ones.</p>
+          <div class="quote">
+            <p>"The gongura mamsam tasted like my mother used to make it — and she was not an easy woman to cook for."</p>
+            <div class="src">— Lakshmi R. · Google</div>
+          </div>
+          <div class="quote">
+            <p>"Biryani correctly messy. Pootharekulu worth the whole trip."</p>
+            <div class="src">— Condé Nast Traveller</div>
+          </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="foot" id="story">
+          <div class="ttl">Telugu Theory.</div>
+          <div class="te">తెలుగు థియరీ</div>
+          <p>Andhra · Telangana · Rayalaseema cooking. Served slowly, on brass, in a house that remembers.</p>
+          <div class="socials">
+            <a href="#" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
+            <a href="#" aria-label="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+            <a href="#" aria-label="WhatsApp"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></a>
+          </div>
+          <div class="copy">© 2026 Telugu Theory Pvt Ltd · Palette complementing palate</div>
+        </footer>
+
       </div>
-    </div>
-    <div class="stats">
-      <div class="stat"><b>42 min</b><span>Average dum time · biryani</span></div>
-      <div class="stat"><b>13</b><span>Spices in the house masala</span></div>
-      <div class="stat"><b>4.8 ★</b><span>Google · 2,400 reviews</span></div>
-    </div>
-  </div>
-</section>
 
-<section class="sec" id="menu">
-  <div class="sechead">
-    <h2>Order from the <em>kitchen.</em></h2>
-    <p>A curated selection for delivery and takeaway. The full printed menu is available in-restaurant — we like to keep the long list for those who visit.</p>
-  </div>
-  <div class="cats">
-    <button class="active" data-c="all">All</button>
-    <button data-c="biryanis">Biryanis</button>
-    <button data-c="tiffins">Tiffins</button>
-    <button data-c="andhra">Andhra Heat</button>
-    <button data-c="coast">From the Coast</button>
-    <button data-c="sweets">Sweets</button>
-    <button data-c="sides">Sides</button>
-  </div>
+      <!-- STICKY ACTION BAR -->
+      <nav class="stickybar">
+        <a class="dir" href="https://maps.google.com/?q=Telugu+Theory+Banjara+Hills+Hyderabad" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Directions
+        </a>
+        <a class="res" href="#reserve">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 11h18"/></svg>
+          Reserve
+        </a>
+        <a class="ord" href="#order">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18l-2 12H5L3 6z"/><path d="M9 6V3h6v3"/></svg>
+          Order
+        </a>
+      </nav>
 
-  <div class="dishes" id="dishes"></div>
-</section>
-
-<section class="band" id="about">
-  <div class="ph">chef portrait · dum pot</div>
-  <div>
-    <span class="eye">Our story</span>
-    <h2>One grandmother. <em>Two</em> stoves. <em>Thirteen</em> spices.</h2>
-    <p>Telugu Theory began where most good restaurants do — in a home, with an argument about salt. Our founder Keerthi took her grandmother's recipe book, kept the recipes, and threw out the shortcuts. What's left is Andhra and Telangana food as it was meant to be: slow, loud, and served without apology.</p>
-    <p>We mill our own rice flour, press our own gingelly oil, and cure our avakaya pickle every March in clay jars. The chilli is from Guntur. The tamarind is from Anantapur. The goat, when it is goat, is from a farmer two hours south.</p>
-  </div>
-</section>
-
-<section class="booking" id="visit">
-  <div class="card">
-    <h3>Reserve a table</h3>
-    <p style="color: var(--tt-muted); font-size: 14.5px; margin-top:-8px; margin-bottom: 20px">We seat parties up to eight. Larger groups — please call us on <b>+91 40 4400 0007</b>.</p>
-    <div class="fields">
-      <div><label>Date</label><input type="date" value="2026-04-22"/></div>
-      <div><label>Time</label><select><option>19:00</option><option>19:30</option><option selected>20:00</option><option>20:30</option><option>21:00</option></select></div>
-      <div><label>Guests</label><select><option>2</option><option selected>4</option><option>6</option><option>8</option></select></div>
-      <div><label>Seating</label><select><option>Indoor</option><option>Courtyard</option></select></div>
-      <div class="full"><label>Name</label><input placeholder="Your full name"/></div>
-      <div><label>Phone</label><input placeholder="+91"/></div>
-      <div><label>Email</label><input placeholder="you@domain.com"/></div>
-      <div class="full"><button class="btn" style="width:100%; padding: 14px">Confirm booking</button></div>
     </div>
   </div>
-  <div class="card">
-    <h3>When we're open</h3>
-    <div class="hours">
-      <b>Tiffin</b><span>Tue — Sun · 7:30 – 11:30</span>
-      <b>Lunch</b><span>Tue — Sun · 12:00 – 15:30</span>
-      <b>Dinner</b><span>Tue — Sun · 19:00 – 23:00</span>
-      <b>Monday</b><span>Closed · the kitchen rests</span>
-    </div>
-    <h3 style="margin-top: 40px">Where we are</h3>
-    <div style="height: 160px; background: repeating-linear-gradient(45deg, #e8d9c2 0 14px, #ddcdb3 14px 28px); border-radius: 12px; display:grid; place-items:center; color: var(--tt-muted); font-family: ui-monospace, monospace; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; margin-top: 14px">map · banjara hills</div>
-    <p style="color: var(--tt-muted); font-size: 14.5px; line-height: 1.6; margin-top: 16px">
-      Plot 14, Road No. 1, Banjara Hills<br/>Hyderabad 500034<br/>
-      Parking: valet after 19:00. Nearest metro — Khairatabad (2.4 km).
-    </p>
-  </div>
-</section>
-
-<section class="quotes" id="reviews">
-  <h2>What people <em>walk out</em> saying.</h2>
-  <div class="qgrid">
-    <div class="q">
-      <div class="stars">★ ★ ★ ★ ★</div>
-      <p>"The gongura mamsam tasted like my mother used to make it — and she was not an easy woman to cook for. Chef, whoever you are, I bow."</p>
-      <div class="src">— Lakshmi R. · Google</div>
-    </div>
-    <div class="q">
-      <div class="stars">★ ★ ★ ★ ★</div>
-      <p>"A restaurant that doesn't hide its heat for outsiders. Biryani was correctly messy. Pootharekulu was worth the whole trip."</p>
-      <div class="src">— Condé Nast Traveller India</div>
-    </div>
-    <div class="q">
-      <div class="stars">★ ★ ★ ★ ☆</div>
-      <p>"Came for the biryani, stayed for the pappu. The service is warm and a little slow — in a way that suits the food."</p>
-      <div class="src">— The Hindu · Food column</div>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <div class="fgrid">
-    <div>
-      <div class="brandline">Telugu Theory</div>
-      <p style="max-width: 360px; line-height: 1.6">Andhra · Telangana · Rayalaseema cooking. Served slowly, on brass, in a house that remembers.</p>
-    </div>
-    <div><h4>Visit</h4><ul><li>Menu</li><li>Reservations</li><li>Private dining</li><li>Gift cards</li></ul></div>
-    <div><h4>Order</h4><ul><li>Delivery</li><li>Takeaway</li><li>Catering</li><li>Festive thalis</li></ul></div>
-    <div><h4>Reach us</h4><ul><li>+91 40 4400 0007</li><li>hello@teluguthy.in</li><li>@telugu.theory</li></ul></div>
-  </div>
-  <div class="fend"><span>© 2026 Telugu Theory Pvt Ltd</span><span>Palette complementing palate</span></div>
-</footer>
-
-<div class="drawer" id="drawer">
-  <button class="close" onclick="toggleDrawer(false)">×</button>
-  <h4>Your basket</h4>
-  <div id="cartLines"></div>
-  <div class="total" id="cartTotal" style="display:none"><span>Total</span><span id="totalVal">₹ 0</span></div>
-  <a class="checkout" id="checkoutBtn" style="display:none">Checkout · Razorpay</a>
 </div>
 
 <script>
-const DISHES = [
-  {id:1, name:'Hyderabadi Kacchi Goat Biryani', cat:'biryanis', desc:'Goat on the bone, dum-cooked 90 minutes. Salan + raita.', price:620, veg:false, badge:'Signature', img:'b', label:'biryani · goat'},
-  {id:2, name:'Telangana Chicken Biryani', cat:'biryanis', desc:'Boneless chicken, darker masala, a smoky finish.', price:480, veg:false, img:'f', label:'biryani · chicken'},
-  {id:3, name:'Kaju Mirch Biryani', cat:'biryanis', desc:'Roasted cashew, green chilli, fried onion.', price:460, veg:true, img:'a', label:'biryani · veg'},
-  {id:4, name:'Pesarattu Upma', cat:'tiffins', desc:'Green gram crepe folded over rava upma, curry leaf.', price:240, veg:true, img:'c', label:'tiffin · crepe'},
-  {id:5, name:'Idli Karam', cat:'tiffins', desc:'Three idlis split and layered with gunpowder + sesame oil.', price:180, veg:true, img:'a', label:'tiffin · idli'},
-  {id:6, name:'Ragi Sangati + Natu Kodi', cat:'tiffins', desc:'Finger millet ball with country chicken gravy.', price:360, veg:false, badge:'Signature', img:'f', label:'tiffin · millet'},
-  {id:7, name:'Guntur Chilli Chicken', cat:'andhra', desc:'Thigh meat, Guntur red chillies, curry leaf. We do not hold back.', price:440, veg:false, badge:'Very spicy', img:'b', label:'andhra · chicken'},
-  {id:8, name:'Gongura Mamsam', cat:'andhra', desc:'Mutton braised with sorrel leaves.', price:560, veg:false, img:'c', label:'andhra · mutton'},
-  {id:9, name:'Vankaya Ulli Karam', cat:'andhra', desc:'Stuffed baby brinjal, onion-chilli paste, gingelly oil.', price:280, veg:true, img:'e', label:'andhra · brinjal'},
-  {id:10, name:'Chepala Pulusu', cat:'coast', desc:'Tamarind fish curry, slow cooked in a clay pot.', price:480, veg:false, badge:'Signature', img:'d', label:'coast · fish curry'},
-  {id:11, name:'Royyala Iguru', cat:'coast', desc:'Prawn cooked down in onion masala. Served with rice.', price:520, veg:false, img:'b', label:'coast · prawns'},
-  {id:12, name:'Crab Pithala Koora', cat:'coast', desc:'Whole swimmer crab, curry leaf, black pepper, coconut.', price:620, veg:false, img:'f', label:'coast · crab'},
-  {id:13, name:'Double Ka Meetha', cat:'sweets', desc:'Bread pudding, saffron milk, pistachio.', price:240, veg:true, badge:'Signature', img:'e', label:'sweets · bread'},
-  {id:14, name:'Bobbatlu', cat:'sweets', desc:'Jaggery-lentil flatbread, warm with ghee.', price:220, veg:true, img:'a', label:'sweets · puran poli'},
-  {id:15, name:'Pootharekulu', cat:'sweets', desc:'Paper-thin rice starch sheets with jaggery and ghee.', price:200, veg:true, img:'e', label:'sweets · paper'},
-  {id:16, name:'Gongura Pappu', cat:'sides', desc:'Sour-leaf lentil stew, the Andhra pappu.', price:220, veg:true, img:'c', label:'sides · dal'},
-  {id:17, name:'Bagara Rice', cat:'sides', desc:'Fragrant rice tempered with whole spice.', price:200, veg:true, img:'a', label:'sides · rice'},
-  {id:18, name:'Avakaya Pickle', cat:'sides', desc:'House-cured mango pickle. Mustard oil, fenugreek.', price:60, veg:true, img:'b', label:'sides · pickle'},
-];
-
-const cart = {};
-
-function render(filter = 'all') {
-  const host = document.getElementById('dishes');
-  host.innerHTML = '';
-  DISHES.filter(d => filter === 'all' || d.cat === filter).forEach(d => {
-    const el = document.createElement('div');
-    el.className = 'dcard';
-    const added = cart[d.id] ? cart[d.id].qty : 0;
-    el.innerHTML = `
-      <div class="img ${d.img}" data-label="${d.label}"></div>
-      ${d.badge ? `<span class="badge ${d.badge === 'Signature' ? 'yellow' : ''}">${d.badge}</span>` : ''}
-      <span class="veg-mark ${d.veg ? '' : 'nv'}"></span>
-      <div class="info">
-        <h3>${d.name}</h3>
-        <div class="desc">${d.desc}</div>
-        <div class="foot">
-          <span class="price">₹ ${d.price}</span>
-          <button class="add ${added ? 'on' : ''}" data-id="${d.id}">${added ? 'In basket · ' + added : 'Add to basket'}</button>
-        </div>
-      </div>`;
-    host.appendChild(el);
-  });
-  host.querySelectorAll('.add').forEach(b => b.onclick = e => {
-    const id = +e.currentTarget.dataset.id;
-    cart[id] = { qty: (cart[id]?.qty || 0) + 1, dish: DISHES.find(x=>x.id===id) };
-    render(document.querySelector('.cats .active').dataset.c);
-    updateCart();
-    toggleDrawer(true);
-  });
-}
-
-function updateCart() {
-  const lines = Object.values(cart);
-  document.getElementById('cartCount').textContent = lines.reduce((a,l)=>a+l.qty,0);
-  const cl = document.getElementById('cartLines');
-  if (!lines.length) {
-    cl.innerHTML = '<div class="empty">Your basket is empty. Add something warm.</div>';
-    document.getElementById('cartTotal').style.display = 'none';
-    document.getElementById('checkoutBtn').style.display = 'none';
-    return;
+  function openDrawer() {
+    document.getElementById('drawer').classList.add('open');
+    document.getElementById('drawerOverlay').classList.add('open');
   }
-  cl.innerHTML = lines.map(l => `
-    <div class="line">
-      <div><b style="font-weight:600">${l.dish.name}</b><br/><span style="color:var(--tt-muted); font-size:12px">₹ ${l.dish.price} · ${l.qty}</span></div>
-      <div style="display:flex; gap:6px; align-items:center">
-        <button data-m="-${l.dish.id}">−</button><span>${l.qty}</span><button data-m="+${l.dish.id}">+</button>
-      </div>
-    </div>`).join('');
-  cl.querySelectorAll('button').forEach(b => b.onclick = e => {
-    const m = e.currentTarget.dataset.m;
-    const id = +m.slice(1);
-    const delta = m[0] === '+' ? 1 : -1;
-    cart[id].qty += delta;
-    if (cart[id].qty <= 0) delete cart[id];
-    render(document.querySelector('.cats .active').dataset.c);
-    updateCart();
-  });
-  const total = lines.reduce((a,l)=>a + l.dish.price * l.qty, 0);
-  document.getElementById('totalVal').textContent = '₹ ' + total.toLocaleString('en-IN');
-  document.getElementById('cartTotal').style.display = 'flex';
-  document.getElementById('checkoutBtn').style.display = 'block';
-}
-
-function toggleDrawer(open) {
-  document.getElementById('drawer').classList.toggle('open', open);
-}
-document.getElementById('cartBtn').onclick = () => toggleDrawer(!document.getElementById('drawer').classList.contains('open'));
-
-document.querySelectorAll('.cats button').forEach(b => {
-  b.onclick = () => {
-    document.querySelectorAll('.cats button').forEach(x => x.classList.remove('active'));
-    b.classList.add('active');
-    render(b.dataset.c);
-  };
-});
-
-render();
-updateCart();
+  function closeDrawer() {
+    document.getElementById('drawer').classList.remove('open');
+    document.getElementById('drawerOverlay').classList.remove('open');
+  }
 </script>
 </body>
 </html>
