@@ -11,56 +11,34 @@
 <link rel="stylesheet" href="brand/brand.css" />
 <style>
   /* ===========================================================
-     STAGE — show side-by-side phone previews on desktop;
-     on real mobile, page is full-bleed.
+     STAGE — full-bleed on all screen sizes
   =========================================================== */
   html, body { margin:0; }
   body {
     font-family: var(--font-body);
     color: var(--tt-ink);
-    background: radial-gradient(circle at 30% 0%, #f0e0c5 0%, #e8d9c2 60%, #ddc9ac 100%);
+    background: var(--tt-paper);
     -webkit-font-smoothing: antialiased;
   }
-  .stage {
-    display:flex; gap: 24px; align-items: flex-start; justify-content: center; flex-wrap: wrap;
-    padding: 24px 24px 60px;
-  }
+  .stage { display: block; padding: 0; }
 
-  /* The phone */
+  /* Phone chrome removed — full-bleed site */
   .phone {
-    width: 390px; height: 844px;
-    background: #111;
-    border-radius: 54px;
-    padding: 12px;
-    box-shadow: 0 0 0 2px #2a2a2a inset, 0 40px 80px -30px rgba(0,0,0,0.5), 0 0 0 1px rgba(0,0,0,0.4);
-    position: relative; flex-shrink: 0;
+    width: 100%; height: auto; min-height: 100vh;
+    background: transparent; border-radius: 0; padding: 0; box-shadow: none;
+    position: relative;
   }
-  .phone::before {
-    content:''; position:absolute; top: 22px; left: 50%; transform: translateX(-50%);
-    width: 110px; height: 28px; border-radius: 999px; background: #000; z-index: 100;
-  }
+  .phone::before { display: none; }
   .screen {
-    width: 100%; height: 100%;
-    border-radius: 42px;
-    overflow: hidden; background: var(--tt-paper);
+    width: 100%; height: auto; min-height: 100vh;
+    border-radius: 0; overflow: visible; background: var(--tt-paper);
     position: relative;
   }
   .scroll {
-    height: 100%; overflow-y: auto; -webkit-overflow-scrolling: touch;
+    height: auto; overflow: visible;
     scroll-behavior: smooth;
   }
-  .scroll::-webkit-scrollbar { width: 0; }
 
-  @media (max-width: 760px) {
-    body { background: var(--tt-paper); }
-    .stage { padding: 0; gap: 0; }
-    .phone {
-      width: 100%; height: auto; min-height: 100vh;
-      background: transparent; border-radius: 0; padding: 0; box-shadow: none;
-    }
-    .phone::before { display: none; }
-    .screen { border-radius: 0; height: auto; min-height: 100vh; }
-  }
 
   /* ===========================================================
      SITE — content inside the screen
@@ -75,8 +53,8 @@
     border-bottom: 1px solid rgba(136,45,24,0.08);
   }
   .topbar .brand { display: flex; align-items: center; gap: 10px; }
-  .topbar .brand img { width: 32px; height: 32px; border-radius: 6px; }
-  .topbar .brand b { font-family: var(--font-head); font-weight: 800; font-size: 16px; letter-spacing: -0.01em; }
+  .topbar .brand img { width: 90px; height: 90px; border-radius: 14px; }
+  .topbar .brand b { font-family: var(--font-head); font-weight: 800; font-size: 19px; letter-spacing: -0.01em; }
   .topbar .brand .te { display: block; font-size: 9px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--tt-sienna); font-weight: 700; margin-top: 1px; }
   .topbar .menu-icon {
     background: transparent; border: 0; width: 36px; height: 36px;
@@ -381,13 +359,13 @@
 
   /* Drawer */
   .drawer-overlay {
-    position: absolute; inset: 0; background: rgba(26,18,10,0.4);
+    position: fixed; inset: 0; background: rgba(26,18,10,0.4);
     opacity: 0; pointer-events: none; transition: opacity 0.25s;
     z-index: 80;
   }
   .drawer-overlay.open { opacity: 1; pointer-events: auto; }
   .drawer {
-    position: absolute; top: 0; right: 0; bottom: 0;
+    position: fixed; top: 0; right: 0; bottom: 0;
     width: 78%;
     background: var(--tt-paper);
     z-index: 81;
@@ -409,6 +387,92 @@
   .drawer li a span { color: var(--tt-sienna); font-size: 12px; font-family: var(--font-body); font-weight: 600; letter-spacing: 0.04em; }
   .drawer .foot-info { margin-top: auto; font-size: 12px; color: var(--tt-muted); line-height: 1.5; }
   .drawer .foot-info b { color: var(--tt-ink); display: block; font-family: var(--font-head); }
+
+  /* =====================================================
+     DESKTOP LAYOUT — min-width: 768px
+     Mobile styles above are untouched.
+  ===================================================== */
+  @media (min-width: 768px) {
+
+    /* Center all content at comfortable reading width */
+    .scroll {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    /* Topbar — more padding, bigger feel */
+    .topbar {
+      padding: 20px 40px 18px;
+    }
+
+    /* Hero — more breathing room, bigger text */
+    .hero {
+      padding: 56px 40px 48px;
+      border-radius: 0;
+    }
+    .hero h1 { font-size: 72px; }
+    .hero .lede { max-width: 560px; font-size: 15px; }
+    .hero-meta { margin-top: 24px; }
+
+    /* Primary actions — order full-width, directions + reserve side by side */
+    .primary {
+      padding: 32px 40px 14px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    .primary .row { display: contents; }
+    .pa.order { grid-column: 1 / -1; min-height: 96px; }
+
+    /* Quick row — fill the full width */
+    .quickrow { padding: 8px 40px 20px; gap: 14px; }
+    .qa { max-width: none; padding: 14px 12px; font-size: 12px; }
+
+    /* Status strip */
+    .status { margin: 0 40px 20px; }
+
+    /* Section headers */
+    .sec { padding: 26px 40px 8px; }
+
+    /* Picks — 4-column grid, no horizontal scroll */
+    .picks {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      overflow: visible;
+      padding: 0 40px 22px;
+      gap: 16px;
+    }
+    .pick { width: auto; flex-shrink: unset; }
+
+    /* Visit — map and info side by side */
+    .visit {
+      margin: 0 40px 20px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+    .visit .map { height: auto; min-height: 260px; }
+    .visit .body { padding: 24px 28px; }
+
+    /* Hours card */
+    .hours-card { margin: 0 40px 20px; }
+
+    /* Reserve form — inline style override */
+    .sec#reserve + div { margin: 0 40px 20px !important; }
+
+    /* Reviews — header full-width, quotes side by side */
+    .reviews { padding: 32px 40px; display: flex; flex-wrap: wrap; gap: 14px; align-items: flex-start; }
+    .reviews .stars, .reviews h2, .reviews .sub { width: 100%; margin-bottom: 0; }
+    .reviews h2 { font-size: 34px; }
+    .quote { flex: 1; min-width: 200px; margin-bottom: 0; }
+
+    /* Footer */
+    .foot { padding: 36px 40px 48px; }
+    .foot p { max-width: 420px; }
+
+    /* Sticky bottom bar — centred within max-width scroll */
+    .stickybar { padding: 14px 40px calc(14px + env(safe-area-inset-bottom)); }
+    .stickybar a { height: 52px; font-size: 13px; }
+  }
 </style>
 </head>
 <body>
@@ -423,16 +487,26 @@
         <button class="close" onclick="closeDrawer()">×</button>
         <div class="ttl">Telugu<br/>Theory.</div>
         <ul>
-          <li><a href="#order">Order online <span>›</span></a></li>
-          <li><a href="#reserve">Reserve a table <span>›</span></a></li>
           <li><a href="#order">Full menu <span>›</span></a></li>
+          <li><a href="#reserve">Reserve a table <span>›</span></a></li>
           <li><a href="#visit">Visit us <span>›</span></a></li>
           <li><a href="#story">Our story <span>›</span></a></li>
-          <li><a href="tel:+914044000007">Call kitchen <span>+91 40 4400 0007</span></a></li>
+          <li><a href="tel:+918462240000">Call us <span>+91 8462 24 0000</span></a></li>
         </ul>
+        <div style="margin-top: 20px; padding-top: 16px; border-top: 1px dashed rgba(136,45,24,0.25);">
+          <div style="font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; font-weight: 700; color: var(--tt-sienna); margin-bottom: 10px;">Also at Hotel Amara</div>
+          <a href="https://amara-hotel.vercel.app" target="_blank" rel="noopener"
+            style="display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-body); font-size: 13px; font-weight: 700; color: var(--tt-ink); text-decoration: none; margin-bottom: 8px;">
+            Hotel Amara <span>›</span>
+          </a><br/>
+          <a href="https://five-zero-three.vercel.app" target="_blank" rel="noopener"
+            style="display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-body); font-size: 13px; font-weight: 700; color: var(--tt-ink); text-decoration: none;">
+            503 Coffeeshop · Level 1 <span>›</span>
+          </a>
+        </div>
         <div class="foot-info">
-          <b>Plot 14, Road No. 1</b>
-          Banjara Hills, Hyderabad 500034<br/>
+          <b>Level 2, Hotel Amara</b>
+          Nizamabad, Telangana 503001<br/>
           @telugu.theory · hello@teluguthy.in
         </div>
       </aside>
@@ -442,7 +516,7 @@
         <!-- TOP BAR -->
         <header class="topbar">
           <div class="brand">
-            <img src="brand/logo-red-square.png" alt=""/>
+            <img src="brand/logo-red-square.svg" alt="Telugu Theory"/>
             <div>
               <b>Telugu Theory</b>
               <span class="te">తెలుగు థియరీ</span>
@@ -457,7 +531,7 @@
         <section class="hero">
           <div class="eye">Andhra · Telangana · Hyderabadi</div>
           <h1>Home cooking,<br/><em>on brass.</em></h1>
-          <p class="lede">A small kitchen in Banjara Hills, with the patience of a grandmother and the discipline of a restaurant.</p>
+          <p class="lede">A small kitchen on Level 2 of Hotel Amara, with the patience of a grandmother and the discipline of a restaurant.</p>
           <div class="hero-meta">
             <span class="dot"></span>
             <span>Open now · Until 23:00</span>
@@ -467,12 +541,12 @@
         <!-- PRIMARY ACTIONS -->
         <section class="primary">
           <div class="row">
-            <a class="pa directions" href="https://maps.google.com/?q=Telugu+Theory+Banjara+Hills+Hyderabad" target="_blank" rel="noopener">
+            <a class="pa directions" href="https://maps.google.com/?q=Hotel+Amara+Nizamabad+Telangana" target="_blank" rel="noopener">
               <div class="ic">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
               </div>
               <h3>Directions</h3>
-              <p>Banjara Hills · 4 km from KBR</p>
+              <p>Inside Hotel Amara · Nizamabad</p>
               <div class="arrow">Open in Maps →</div>
             </a>
 
@@ -492,7 +566,7 @@
             </div>
             <div class="body">
               <h3>Order food</h3>
-              <p>Delivery in 35–45 min · across Hyderabad</p>
+              <p>Delivery in 30–45 min · across Nizamabad</p>
               <div class="arrow">Browse menu →</div>
             </div>
           </a>
@@ -500,11 +574,11 @@
 
         <!-- QUICK ROW -->
         <div class="quickrow">
-          <a class="qa" href="tel:+914044000007">
+          <a class="qa" href="tel:+918462240000">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.33 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/></svg>
             Call
           </a>
-          <a class="qa" href="https://wa.me/914044000007" target="_blank" rel="noopener">
+          <a class="qa" href="https://wa.me/918462240000" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
             WhatsApp
           </a>
@@ -570,7 +644,7 @@
         <section class="sec" id="visit" style="padding-bottom: 0">
           <div class="sec-head">
             <h2>Visit us</h2>
-            <a href="https://maps.google.com/?q=Telugu+Theory+Banjara+Hills+Hyderabad">Maps →</a>
+            <a href="https://maps.google.com/?q=Hotel+Amara+Nizamabad+Telangana">Maps →</a>
           </div>
         </section>
         <div class="visit">
@@ -581,12 +655,12 @@
             </div>
           </div>
           <div class="body">
-            <span class="area">Banjara Hills</span>
-            <h3>Plot 14, Road No. 1</h3>
-            <p>Hyderabad 500034 · Valet after 19:00 · 2.4 km from Khairatabad metro</p>
+            <span class="area">Nizamabad</span>
+            <h3>Level 2, Hotel Amara</h3>
+            <p>Nizamabad, Telangana 503001 · Parking available · Inside Hotel Amara</p>
             <div class="actions">
-              <a href="https://maps.google.com/?q=Telugu+Theory+Banjara+Hills+Hyderabad" target="_blank" rel="noopener">Get directions</a>
-              <a class="alt" href="tel:+914044000007">Call</a>
+              <a href="https://maps.google.com/?q=Hotel+Amara+Nizamabad+Telangana" target="_blank" rel="noopener">Get directions</a>
+              <a class="alt" href="tel:+918462240000">Call</a>
             </div>
           </div>
         </div>
@@ -599,9 +673,9 @@
         </section>
         <div class="hours-card">
           <h3>Hours</h3>
-          <div class="row"><b>Mon</b><span>Dinner only · 19:00 — 23:00</span></div>
-          <div class="row now"><b>Tue · Today</b><span>12:00 — 15:30 · 19:00 — 23:00</span></div>
-          <div class="row"><b>Wed — Sun</b><span>12:00 — 15:30 · 19:00 — 23:00</span></div>
+          <div class="row"><b>Every day</b><span>Breakfast · 8:00 — 10:30</span></div>
+          <div class="row"><b>Every day</b><span>Lunch · 12:00 — 15:30</span></div>
+          <div class="row now"><b>Every day</b><span>Dinner · 19:00 — 23:00</span></div>
           <div class="row"><b>Thali</b><span>Mon — Fri · 12:30 — 15:30</span></div>
         </div>
 
@@ -667,14 +741,29 @@
             <a href="#" aria-label="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
             <a href="#" aria-label="WhatsApp"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></a>
           </div>
-          <div class="copy">© 2026 Telugu Theory Pvt Ltd · Palette complementing palate</div>
+          <div style="margin-top: 20px; padding-top: 16px; border-top: 1px solid rgba(247,239,224,0.18);">
+            <div style="font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; font-weight: 700; color: var(--tt-yellow); margin-bottom: 10px;">Part of Hotel Amara · Nizamabad</div>
+            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+              <a href="https://amara-hotel.vercel.app" target="_blank" rel="noopener"
+                style="font-family: var(--font-body); font-size: 12px; font-weight: 700; color: var(--tt-cream);
+                  text-decoration: none; border: 1px solid rgba(247,239,224,0.28); padding: 7px 14px; border-radius: 999px;">
+                Hotel Amara →
+              </a>
+              <a href="https://five-zero-three.vercel.app" target="_blank" rel="noopener"
+                style="font-family: var(--font-body); font-size: 12px; font-weight: 700; color: var(--tt-cream);
+                  text-decoration: none; border: 1px solid rgba(247,239,224,0.28); padding: 7px 14px; border-radius: 999px;">
+                503 Coffeeshop · Level 1 →
+              </a>
+            </div>
+          </div>
+          <div class="copy">© 2026 Telugu Theory · Nizamabad · Palette complementing palate</div>
         </footer>
 
       </div>
 
       <!-- STICKY ACTION BAR -->
       <nav class="stickybar">
-        <a class="dir" href="https://maps.google.com/?q=Telugu+Theory+Banjara+Hills+Hyderabad" target="_blank" rel="noopener">
+        <a class="dir" href="https://maps.google.com/?q=Hotel+Amara+Nizamabad+Telangana" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
           Directions
         </a>
